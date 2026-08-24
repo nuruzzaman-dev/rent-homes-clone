@@ -59,3 +59,7 @@ Section 06 / Attention now presents as a compact `100svh` composition on desktop
 ## New exterior-to-interior cinematic sequence — 2026-08-24
 
 Added a new `02 / Immersion` section immediately below `02 / Desire`, preserving all existing sections after it. The section uses 240 uploaded WebP frames generated from one coherent 8-second exterior-to-interior architectural source clip. Desktop renders through one canvas with GSAP ScrollTrigger pinning and 2.4-second scrub smoothing; the frame counter updates from 001 / 240. The journey is framed as Exterior → Interior → Room. Mobile and reduced-motion paths use the hero poster and avoid forced sequence loading. Typecheck and production build pass, desktop/mobile captures were taken, and the browser console is clean. The standard large-chunk advisory remains the only build note.
+
+## Cinematic handoff fix — 2026-08-24
+
+Adjusted the exterior-to-interior ScrollTrigger handoff so the scrub settles to frame 240, explicitly draws the final frame on leave, and releases the pinned section with a subtle fade/translate entrance for 03 / Exploration. The scrub catch-up was reduced from 2.4 to 1.65 to prevent the end from feeling stuck while retaining smooth motion. Browser verification reached `240 / 240` and exposed the following Exploration content; the browser console remained clean. Typecheck and production build pass. The visible 100vh composition, canvas renderer, poster fallback, and reduced-motion behavior remain unchanged.

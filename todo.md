@@ -102,3 +102,12 @@
 - [x] Document the new sequence assets, source assumptions, dimensions, and licensing in the asset manifest.
 - [x] Re-run typecheck, production build, responsive screenshots, interaction tests, and browser-console QA.
 - [ ] Save the new cinematic-section checkpoint.
+
+## Cinematic sequence handoff fix
+
+- [x] Ensure the final frame is drawn and held before the pinned trigger reaches its end.
+- [x] Ensure ScrollTrigger releases the canvas section and continues into 03 / Exploration without a dead-end.
+- [x] Add a subtle handoff fade/overlap so the next section enters naturally after the sequence.
+- [x] Preserve the 100vh composition, mobile poster fallback, and reduced-motion behavior.
+- [x] Verify the final-frame-to-next-section scroll flow in a browser, then run build and console QA.
+- [ ] Save the transition-fix checkpoint.

@@ -220,7 +220,7 @@ export default function Home() {
           const resize = () => drawFrame(cinematicFrameRef.current);
           window.addEventListener("resize", resize);
           removeCinematic = () => window.removeEventListener("resize", resize);
-          gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: cinematicRef.current, start: "top top", end: "+=1900", pin: true, pinSpacing: true, scrub: 2.4, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: updateCinematic } });
+          gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: cinematicRef.current, start: "top top", end: "+=1900", pin: true, pinSpacing: true, scrub: 1.65, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: updateCinematic, onLeave: () => { updateCinematic({ progress: 1 }); gsap.fromTo("#lifestyles", { autoAlpha: 0.82, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out", overwrite: true }); }, onEnterBack: () => { gsap.set("#lifestyles", { clearProps: "opacity,transform" }); } } });
         }
       }
       if (heroRef.current && desktopMotion && heroImageRef.current) {
