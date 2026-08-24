@@ -111,3 +111,12 @@
 - [x] Preserve the 100vh composition, mobile poster fallback, and reduced-motion behavior.
 - [x] Verify the final-frame-to-next-section scroll flow in a browser, then run build and console QA.
 - [ ] Save the transition-fix checkpoint.
+
+## Cinematic section order change
+
+- [x] Move 02 / Immersion directly below the hero section.
+- [x] Keep 02 / Desire immediately after the cinematic section and preserve all later sections in their current order.
+- [x] Preserve the cinematic canvas, pin release, frame counter, mobile poster fallback, and reduced-motion behavior.
+- [x] Verify navigation anchors and page flow after the reorder.
+- [x] Re-run typecheck, production build, screenshots, and browser-console QA.
+- [ ] Save the reordered-section checkpoint.

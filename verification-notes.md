@@ -63,3 +63,7 @@ Added a new `02 / Immersion` section immediately below `02 / Desire`, preserving
 ## Cinematic handoff fix — 2026-08-24
 
 Adjusted the exterior-to-interior ScrollTrigger handoff so the scrub settles to frame 240, explicitly draws the final frame on leave, and releases the pinned section with a subtle fade/translate entrance for 03 / Exploration. The scrub catch-up was reduced from 2.4 to 1.65 to prevent the end from feeling stuck while retaining smooth motion. Browser verification reached `240 / 240` and exposed the following Exploration content; the browser console remained clean. Typecheck and production build pass. The visible 100vh composition, canvas renderer, poster fallback, and reduced-motion behavior remain unchanged.
+
+## Cinematic section order change — 2026-08-24
+
+Moved `02 / Immersion` directly below the hero. `02 / Desire` now follows the cinematic sequence, and the existing Exploration, property, Signature, Attention, Place, Confidence, Decision, What matters, stories, CTA, and footer sections remain in their prior order and styling. Desktop and mobile full-page captures confirm the revised composition. Browser content extraction confirms the order Hero → Immersion → Desire → Exploration, and the console is clean. Typecheck and production build pass; the standard large-chunk advisory remains the only build note.
