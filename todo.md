@@ -30,3 +30,13 @@
 - [x] Verify exact attached copy, narrative sequence, reduced-motion behavior, semantic structure, focus states, alt text, and no fake testimonial/statistical claims.
 - [x] Re-run visual, interaction, console, network, performance, and production-build QA after refactoring. Desktop/mobile screenshots pass, the browser console is clean, interactions were exercised, and the only build note is the standard large-chunk advisory.
 - [ ] Save and publish a new checkpoint only after all required gaps are closed or explicitly documented as unavailable due to missing real assets/data.
+
+## Section 10 pinned scrub interaction
+
+- [x] Add a dedicated pinned Section 10 desktop composition with a scrubbed six-step timeline.
+- [x] Keep the headline and framing fixed while the active word, supporting copy, image source, crop, and progress indicator transition with scroll.
+- [x] Add an intentional section travel distance and prevent nested or conflicting ScrollTriggers.
+- [x] Keep click selection synchronized with the scrubbed state without breaking scroll control.
+- [x] Provide a mobile and reduced-motion fallback that remains readable and does not pin or force horizontal movement.
+- [x] Re-run typecheck, production build, desktop/mobile screenshots, and browser-console QA.
+- [ ] Save the updated checkpoint after verification.
