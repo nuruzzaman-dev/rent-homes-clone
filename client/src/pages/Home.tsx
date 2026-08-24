@@ -1,102 +1,99 @@
 /*
- * Style reminder: Reference-matched RentHomes visual language — warm ivory canvas,
- * architectural navy imagery, charcoal editorial type, cool blue accents, restrained
- * borders, and quiet motion. Keep all page styling in Tailwind utility classes only.
+ * Style reminder: RentHomes is an architectural film that happens to let people discover homes.
+ * Preserve the DNA: dark navy, warm ivory, editorial serif, architectural imagery, thin rules,
+ * restrained controls, and intentional pacing. Page-specific styling stays Tailwind utility-only.
  */
 
-import { useMemo, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { toast } from "sonner";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowDown,
   ArrowRight,
-  BedDouble,
-  ChevronDown,
+  ArrowUpRight,
   Compass,
   Heart,
   Home as HomeIcon,
   Menu,
+  MoveRight,
   Search,
   SlidersHorizontal,
   Sparkles,
   X,
 } from "lucide-react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const HERO_IMAGE = "/manus-storage/rent-homes-hero_6c575328.png";
 const MARK_IMAGE = "/manus-storage/rent-homes-mark_2064c270.png";
 
+const lifestyleImages = [
+  "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=85",
+  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85",
+  "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85",
+  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
+  "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1400&q=85",
+];
+
+const lifestyleCards = [
+  { number: "01", title: "City life", description: "For people who want everything within reach.", image: lifestyleImages[0], width: "w-full lg:w-[38vw]" },
+  { number: "02", title: "Coastal living", description: "For mornings that begin with a horizon.", image: lifestyleImages[1], width: "w-full lg:w-[34vw]" },
+  { number: "03", title: "Quiet retreat", description: "For the space to hear yourself think.", image: lifestyleImages[2], width: "w-full lg:w-[40vw]" },
+  { number: "04", title: "Modern minimal", description: "For a life shaped by light and line.", image: lifestyleImages[3], width: "w-full lg:w-[32vw]" },
+  { number: "05", title: "Nature escape", description: "For the feeling of arriving somewhere rare.", image: lifestyleImages[4], width: "w-full lg:w-[36vw]" },
+];
+
 const properties = [
-  {
-    name: "Ocean Breeze Villa",
-    city: "Malibu, California",
-    type: "Villa",
-    price: "$9,100",
-    period: "/ month",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85",
-    tone: "bg-[#dfe7e9]",
-  },
-  {
-    name: "Jackson House",
-    city: "Austin, Texas",
-    type: "House",
-    price: "$7,500",
-    period: "/ month",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85",
-    tone: "bg-[#dedbd4]",
-  },
-  {
-    name: "Lakeside Cottage",
-    city: "Como, Italy",
-    type: "Cottage",
-    price: "€5,400",
-    period: "/ month",
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=85",
-    tone: "bg-[#d6dfe2]",
-  },
+  { number: "01", name: "Ocean Terrace Villa", city: "Malibu, California", type: "Villa", price: "$4.8M", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=85" },
+  { number: "02", name: "Jackson House", city: "Austin, Texas", type: "House", price: "$2.9M", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85" },
+  { number: "03", name: "Lakeside Cottage", city: "Como, Italy", type: "Cottage", price: "€1.8M", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=85" },
 ];
 
-const steps = [
-  {
-    number: "01",
-    icon: Compass,
-    title: "Research phase",
-    body: "Tell us what matters. We turn a broad search into a considered shortlist of places worth seeing.",
-  },
-  {
-    number: "02",
-    icon: SlidersHorizontal,
-    title: "Close the deal",
-    body: "Compare every detail in one clear view, then move forward with the confidence to make a decision.",
-  },
-  {
-    number: "03",
-    icon: Sparkles,
-    title: "Key delivery",
-    body: "From first enquiry to the moment you arrive, we keep the final steps feeling simple and human.",
-  },
+const dayFrames = [
+  { time: "07:00", title: "Morning light", copy: "The first light enters through the eastern windows.", image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1800&q=85" },
+  { time: "09:30", title: "Slow coffee", copy: "A quieter start to the day, with nowhere else to be.", image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85" },
+  { time: "13:00", title: "Open air", copy: "The architecture gives the day room to breathe.", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85" },
+  { time: "18:40", title: "Golden hour", copy: "The house changes with the light.", image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85" },
+  { time: "22:15", title: "Quiet", copy: "The last room is the one that lets you switch off.", image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85" },
 ];
 
-function SectionLabel({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  return (
-    <div className={`flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] ${light ? "text-white/65" : "text-[#6f7d8c]"}`}>
-      <span className={`h-px w-8 ${light ? "bg-white/35" : "bg-[#3d6f9d]"}`} />
-      <span>{children}</span>
-    </div>
-  );
+const detailItems = [
+  { id: "light", label: "Light", copy: "Designed around the movement of natural light throughout the day.", position: "left-[26%] top-[26%]" },
+  { id: "material", label: "Material", copy: "Stone, timber, and glass held in a quiet, tactile balance.", position: "left-[67%] top-[35%]" },
+  { id: "space", label: "Space", copy: "Every threshold opens onto another feeling of volume.", position: "left-[55%] top-[69%]" },
+  { id: "view", label: "View", copy: "The horizon is treated as part of the architecture.", position: "left-[82%] top-[58%]" },
+];
+
+const destinations = [
+  { city: "New York", coordinate: "40.7128° N / 74.0060° W", description: "Vertical energy, old brick, and rooms that keep pace with the city.", image: "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1200&q=85" },
+  { city: "Copenhagen", coordinate: "55.6761° N / 12.5683° E", description: "Measured calm, natural materials, and a sharper idea of home.", image: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=85" },
+  { city: "Sydney", coordinate: "33.8688° S / 151.2093° E", description: "Open air, long light, and architecture that leans toward the water.", image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85" },
+];
+
+const methodSteps = [
+  ["01", "Research", "A focused beginning."],
+  ["02", "Shortlist", "Less noise, more signal."],
+  ["03", "View", "See what the screen cannot show."],
+  ["04", "Choose", "Make the decision your own."],
+  ["05", "Move in", "Begin the part that matters."],
+];
+
+const feelWords = [
+  ["Space", "room to live"],
+  ["Light", "a changing atmosphere"],
+  ["Material", "something you can feel"],
+  ["Privacy", "a pause from the world"],
+  ["View", "a wider horizon"],
+  ["Location", "the life around it"],
+];
+
+function SectionLabel({ children, light = false }: { children: ReactNode; light?: boolean }) {
+  return <div className={`flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] ${light ? "text-white/60" : "text-[#72808a]"}`}><span className={`h-px w-8 ${light ? "bg-white/35" : "bg-[#3d6f9d]"}`} /><span>{children}</span></div>;
 }
 
-function Logo({ compact = false }: { compact?: boolean }) {
-  return (
-    <a href="#top" className="group flex items-center gap-2.5" aria-label="RentHomes home">
-      <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[#eef2f1] ring-1 ring-[#dae3e2] transition-transform duration-200 group-hover:-rotate-6">
-        <img src={MARK_IMAGE} alt="" className="h-7 w-7 object-contain" />
-      </span>
-      {!compact && (
-        <span className="font-[Cormorant_Garamond] text-[19px] font-semibold tracking-[-0.04em] text-[#182531]">
-          Rent<span className="text-[#3d6f9d]">Homes</span>
-        </span>
-      )}
-    </a>
-  );
+function Logo() {
+  return <a href="#top" className="group flex items-center gap-2.5" aria-label="RentHomes home"><span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-[#eef2f1] ring-1 ring-[#dae3e2] transition-transform duration-200 group-hover:-rotate-6"><img src={MARK_IMAGE} alt="" className="h-7 w-7 object-contain" /></span><span className="font-[Cormorant_Garamond] text-[19px] font-semibold tracking-[-0.04em] text-[#182531]">Rent<span className="text-[#3d6f9d]">Homes</span></span></a>;
 }
 
 export default function Home() {
@@ -104,248 +101,89 @@ export default function Home() {
   const [city, setCity] = useState("All cities");
   const [type, setType] = useState("Any property");
   const [price, setPrice] = useState("Any price");
-  const [hasSearched, setHasSearched] = useState(false);
   const [saved, setSaved] = useState<string[]>([]);
+  const [activeDetail, setActiveDetail] = useState("light");
+  const [activeDestination, setActiveDestination] = useState(0);
+  const [activeMethod, setActiveMethod] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const heroImageRef = useRef<HTMLImageElement>(null);
+  const lifestyleRef = useRef<HTMLElement>(null);
+  const lifestyleTrackRef = useRef<HTMLDivElement>(null);
+  const dayRef = useRef<HTMLElement>(null);
+  const dayImageRef = useRef<HTMLImageElement>(null);
+  const dayTimeRef = useRef<HTMLSpanElement>(null);
+  const dayTitleRef = useRef<HTMLHeadingElement>(null);
+  const dayCopyRef = useRef<HTMLParagraphElement>(null);
+  const methodLineRef = useRef<HTMLSpanElement>(null);
 
-  const filteredProperties = useMemo(() => {
-    return properties.filter((property) => {
-      const cityMatch = city === "All cities" || property.city.includes(city);
-      const typeMatch = type === "Any property" || property.type === type;
-      const priceMatch = price === "Any price" || (price === "Under $8,000" ? property.price.includes("7,500") || property.price.includes("5,400") : property.price.includes("9,100"));
-      return cityMatch && typeMatch && priceMatch;
-    });
-  }, [city, type, price]);
+  const filteredProperties = useMemo(() => properties.filter((property) => {
+    const cityMatch = city === "All cities" || property.city.includes(city);
+    const typeMatch = type === "Any property" || property.type === type;
+    const priceMatch = price === "Any price" || (price === "Under $3M" ? property.price.includes("2.9") || property.price.includes("1.8") : property.price.includes("4.8"));
+    return cityMatch && typeMatch && priceMatch;
+  }), [city, type, price]);
 
-  const handleSearch = () => {
-    setHasSearched(true);
-    document.querySelector("#most-viewed")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    toast.success(filteredProperties.length ? `${filteredProperties.length} homes match your search` : "Try widening your search", {
-      description: "Your shortlist has been updated below.",
-    });
-  };
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const desktopMotion = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)").matches;
+      gsap.fromTo("[data-reveal]", { opacity: 0, y: reduced ? 0 : 26 }, { opacity: 1, y: 0, duration: reduced ? 0.2 : 0.9, stagger: reduced ? 0 : 0.08, ease: "power3.out", delay: reduced ? 0 : 0.15 });
+      if (heroImageRef.current && !reduced) gsap.fromTo(heroImageRef.current, { scale: 1.08 }, { scale: 1, duration: 2.1, ease: "power3.out" });
+      if (desktopMotion && lifestyleRef.current && lifestyleTrackRef.current) {
+        const track = lifestyleTrackRef.current;
+        const travel = () => Math.max(0, track.scrollWidth - window.innerWidth + 72);
+        gsap.to(track, { x: () => -travel(), ease: "none", scrollTrigger: { trigger: lifestyleRef.current, start: "top top", end: () => `+=${travel() + window.innerHeight * 0.55}`, pin: true, scrub: 1, invalidateOnRefresh: true } });
+      }
+      if (dayRef.current && dayImageRef.current && dayTimeRef.current && dayTitleRef.current && dayCopyRef.current && !reduced) {
+        const proxy = { progress: 0 };
+        const updateDay = () => {
+          const index = Math.min(dayFrames.length - 1, Math.round(proxy.progress * (dayFrames.length - 1)));
+          const frame = dayFrames[index];
+          if (dayImageRef.current && dayImageRef.current.src !== frame.image) dayImageRef.current.src = frame.image;
+          if (dayTimeRef.current) dayTimeRef.current.textContent = frame.time;
+          if (dayTitleRef.current) dayTitleRef.current.textContent = frame.title;
+          if (dayCopyRef.current) dayCopyRef.current.textContent = frame.copy;
+        };
+        gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: dayRef.current, start: "top top", end: "bottom bottom", pin: true, scrub: 0.8, onUpdate: updateDay } });
+      }
+      if (methodLineRef.current && !reduced) gsap.fromTo(methodLineRef.current, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", ease: "none", scrollTrigger: { trigger: methodLineRef.current, start: "top 80%", end: "bottom 35%", scrub: 1 } });
+      ScrollTrigger.refresh();
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
 
-  const toggleSaved = (name: string) => {
-    setSaved((current) => current.includes(name) ? current.filter((item) => item !== name) : [...current, name]);
-    toast(saved.includes(name) ? "Removed from saved homes" : "Saved to your shortlist");
-  };
+  const search = () => { document.querySelector("#properties")?.scrollIntoView({ behavior: "smooth" }); toast.success(filteredProperties.length ? `${filteredProperties.length} residences in your view` : "Try widening your search", { description: "Your shortlist is updated below." }); };
+  const toggleSaved = (name: string) => { const next = saved.includes(name) ? saved.filter((item) => item !== name) : [...saved, name]; setSaved(next); toast(next.includes(name) ? "Saved to your shortlist" : "Removed from your shortlist"); };
+  const start = () => { setCity("All cities"); setType("Any property"); setPrice("Any price"); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
-  const closeMenu = () => setMenuOpen(false);
+  return <div ref={rootRef} id="top" className="min-h-screen overflow-x-hidden bg-[#f5f5f1] font-[DM_Sans] text-[#182531] selection:bg-[#3d6f9d] selection:text-white">
+    <header className="absolute inset-x-0 top-0 z-40"><div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 lg:px-12 lg:py-7"><Logo /><nav className="hidden items-center gap-8 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/75 lg:flex"><a href="#top" className="border-b border-white pb-1 text-white">Home</a><a href="#lifestyles" className="transition hover:text-white">Lifestyles</a><a href="#properties" className="transition hover:text-white">Properties</a><a href="#method" className="transition hover:text-white">How it works</a><a href="#locations" className="transition hover:text-white">Locations</a></nav><div className="hidden items-center gap-5 lg:flex"><button onClick={() => toast("Sign in is ready for your account connection.")} className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/75 hover:text-white">Sign in</button><button onClick={() => toast("List a home is ready for your enquiry.")} className="rounded-full border border-white/40 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-[#182531] active:scale-[0.97]">List a home</button></div><button aria-label={menuOpen ? "Close navigation" : "Open navigation"} onClick={() => setMenuOpen(!menuOpen)} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/35 text-white hover:bg-white/10 lg:hidden">{menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div>{menuOpen && <div className="mx-4 rounded-2xl border border-white/15 bg-[#182531]/95 p-5 shadow-2xl backdrop-blur-xl lg:hidden"><nav className="flex flex-col gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80"><a href="#lifestyles" onClick={() => setMenuOpen(false)}>Lifestyles</a><a href="#properties" onClick={() => setMenuOpen(false)}>Properties</a><a href="#method" onClick={() => setMenuOpen(false)}>How it works</a><a href="#locations" onClick={() => setMenuOpen(false)}>Locations</a><button onClick={() => { setMenuOpen(false); toast("List a home is ready for your enquiry."); }} className="mt-2 rounded-full bg-[#dce8ed] px-4 py-3 text-[#182531]">List a home</button></nav></div>}</header>
 
-  return (
-    <div id="top" className="min-h-screen overflow-x-hidden bg-[#f5f5f1] font-[DM_Sans] text-[#182531] selection:bg-[#3d6f9d] selection:text-white">
-      <header className="absolute inset-x-0 top-0 z-30">
-        <div className="mx-auto flex max-w-[1320px] items-center justify-between px-5 py-5 sm:px-8 lg:px-12 lg:py-7">
-          <Logo />
-          <nav className="hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[0.12em] text-white/80 lg:flex">
-            <a className="border-b border-white/70 pb-1 text-white transition-colors hover:text-white" href="#top">Home</a>
-            <a className="pb-1 transition-colors hover:text-white" href="#most-viewed">Most Viewed</a>
-            <a className="pb-1 transition-colors hover:text-white" href="#about">About us</a>
-            <a className="pb-1 transition-colors hover:text-white" href="#steps">Our process</a>
-          </nav>
-          <div className="hidden items-center gap-5 lg:flex">
-            <button onClick={() => toast("Sign in is ready for your account connection.")} className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white">Sign in</button>
-            <button onClick={() => toast("Tell us what you are looking for and we’ll be in touch.")} className="rounded-full border border-white/45 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition duration-200 hover:bg-white hover:text-[#182531] active:scale-[0.97]">List a home</button>
-          </div>
-          <button aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((open) => !open)} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/35 text-white transition hover:bg-white/10 lg:hidden">
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="mx-4 rounded-2xl border border-white/15 bg-[#182531]/95 p-5 shadow-2xl backdrop-blur-xl lg:hidden">
-            <div className="flex flex-col gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
-              <a href="#top" onClick={closeMenu}>Home</a>
-              <a href="#most-viewed" onClick={closeMenu}>Most Viewed</a>
-              <a href="#about" onClick={closeMenu}>About us</a>
-              <a href="#steps" onClick={closeMenu}>Our process</a>
-              <button className="mt-2 w-full rounded-full bg-[#dce8ed] px-4 py-3 text-[#182531]" onClick={() => { closeMenu(); toast("Tell us what you are looking for and we’ll be in touch."); }}>List a home</button>
-            </div>
-          </div>
-        )}
-      </header>
+    <main>
+      <section ref={heroRef} className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-[#142739] pb-10 pt-32 sm:pb-14 lg:pb-20"><img ref={heroImageRef} src={HERO_IMAGE} alt="Warmly lit contemporary villa at blue hour" className="absolute inset-0 h-full w-full object-cover object-center" /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,24,36,0.92)_0%,rgba(11,24,36,0.7)_38%,rgba(11,24,36,0.2)_100%)]" /><div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(11,24,36,0.7)_0%,transparent_48%)]" /><div className="relative mx-auto grid w-full max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:px-12"><div className="max-w-[660px]"><div data-reveal><SectionLabel light>01 / Discovery</SectionLabel></div><h1 data-reveal className="mt-7 max-w-[620px] font-[Cormorant_Garamond] text-[clamp(3.5rem,7vw,7.5rem)] font-medium leading-[0.86] tracking-[-0.07em] text-white">Finding your new home is simple.</h1><p data-reveal className="mt-8 max-w-[410px] text-sm leading-7 text-white/65">The right place is not only found. It is felt — in the light, the space, and the first quiet moment you imagine living there.</p><a data-reveal href="#philosophy" className="mt-9 inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white hover:text-[#c4d9e5]">Enter the story <ArrowDown className="h-4 w-4" /></a></div><div data-reveal className="lg:justify-self-end"><p className="mb-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/55">Find your kind of living</p><div className="grid overflow-hidden rounded-2xl border border-white/20 bg-white/15 shadow-2xl backdrop-blur-xl sm:grid-cols-[1fr_1fr_1fr_auto]"><label className="flex min-w-0 flex-col gap-2 bg-white/95 px-5 py-4"><span className="text-[9px] font-semibold uppercase tracking-[0.17em] text-[#80909a]">Location</span><select value={city} onChange={(e) => setCity(e.target.value)} className="bg-transparent text-sm font-medium text-[#182531] outline-none"><option>All cities</option><option>Malibu</option><option>Austin</option><option>Como</option></select></label><label className="flex min-w-0 flex-col gap-2 border-t border-[#e0e3df] bg-white/95 px-5 py-4 sm:border-l sm:border-t-0"><span className="text-[9px] font-semibold uppercase tracking-[0.17em] text-[#80909a]">Property type</span><select value={type} onChange={(e) => setType(e.target.value)} className="bg-transparent text-sm font-medium text-[#182531] outline-none"><option>Any property</option><option>Villa</option><option>House</option><option>Cottage</option></select></label><label className="flex min-w-0 flex-col gap-2 border-t border-[#e0e3df] bg-white/95 px-5 py-4 sm:border-l sm:border-t-0"><span className="text-[9px] font-semibold uppercase tracking-[0.17em] text-[#80909a]">Price</span><select value={price} onChange={(e) => setPrice(e.target.value)} className="bg-transparent text-sm font-medium text-[#182531] outline-none"><option>Any price</option><option>Under $3M</option><option>Premium homes</option></select></label><button onClick={search} className="flex min-h-[58px] items-center justify-center gap-3 bg-[#3d6f9d] px-7 text-[10px] font-semibold uppercase tracking-[0.17em] text-white transition hover:bg-[#2f5b84] active:scale-[0.98]"><Search className="h-4 w-4" />Search</button></div></div></div><div className="absolute bottom-5 right-5 hidden items-center gap-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/50 lg:flex"><span className="h-px w-12 bg-white/30" />Scroll to discover</div></section>
 
-      <main>
-        <section className="relative isolate min-h-[760px] overflow-hidden bg-[#1a2b3b] sm:min-h-[820px]">
-          <img src={HERO_IMAGE} alt="Warmly lit contemporary villa at dusk" className="absolute inset-0 h-full w-full object-cover object-center" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,25,37,0.9)_0%,rgba(12,25,37,0.68)_34%,rgba(12,25,37,0.12)_75%,rgba(12,25,37,0.2)_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(12,25,37,0.55)_0%,transparent_40%)]" />
-          <div className="relative mx-auto flex min-h-[760px] max-w-[1320px] flex-col justify-center px-5 pb-28 pt-36 sm:min-h-[820px] sm:px-8 lg:px-12">
-            <div className="max-w-[560px]">
-              <SectionLabel light>Find your place</SectionLabel>
-              <h1 className="mt-7 max-w-[540px] font-[Cormorant_Garamond] text-[clamp(3.4rem,7vw,6.5rem)] font-medium leading-[0.92] tracking-[-0.065em] text-white">
-                Finding your new home is simple.
-              </h1>
-              <p className="mt-7 max-w-[400px] text-sm leading-7 text-white/68 sm:text-[15px]">
-                A considered way to discover apartments, villas, and houses that feel right from the first view.
-              </p>
-              <a href="#most-viewed" className="mt-9 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:text-[#c3d9e4]">
-                Explore the collection <ArrowDown className="h-4 w-4" />
-              </a>
-            </div>
+      <section id="philosophy" className="relative bg-[#eef1ef] px-5 py-28 sm:px-8 lg:min-h-[78svh] lg:px-12 lg:py-36"><div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[0.45fr_1.55fr] lg:items-center"><div><SectionLabel>02 / Desire</SectionLabel><p className="mt-6 max-w-[210px] text-xs leading-6 text-[#7c898e]">An address is a beginning. The details are what make it yours.</p></div><div className="max-w-[890px]"><h2 className="font-[Cormorant_Garamond] text-[clamp(3.4rem,7.5vw,8rem)] font-medium leading-[0.86] tracking-[-0.07em] text-[#182531]">A home is more than four walls.</h2><p className="mt-10 max-w-[500px] text-xl leading-[1.35] text-[#6b7a80] sm:text-2xl">It is light. Space. Silence. The feeling of arriving.</p></div></div><div className="absolute bottom-10 right-10 hidden font-mono text-[9px] uppercase tracking-[0.18em] text-[#9da9aa] lg:block">40° 42' 46.2" N / 74° 00' 21.5" W</div></section>
 
-            <div className="absolute bottom-8 left-5 right-5 max-w-[1030px] sm:left-8 sm:right-8 lg:bottom-12 lg:left-12">
-              <div className="mb-3 flex items-center justify-between px-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/65">
-                <span>Search your next address</span>
-                <span className="hidden sm:inline">01 — 03</span>
-              </div>
-              <div className="grid gap-px overflow-hidden rounded-2xl border border-white/20 bg-white/20 shadow-2xl backdrop-blur-xl sm:grid-cols-[1.1fr_1fr_1fr_auto]">
-                <label className="group flex flex-col gap-2 bg-white/95 px-5 py-4 transition hover:bg-white">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#82909d]">City</span>
-                  <select value={city} onChange={(event) => setCity(event.target.value)} className="w-full appearance-none bg-transparent text-sm font-medium text-[#182531] outline-none">
-                    <option>All cities</option>
-                    <option>Malibu</option>
-                    <option>Austin</option>
-                    <option>Como</option>
-                  </select>
-                </label>
-                <label className="group flex flex-col gap-2 bg-white/95 px-5 py-4 transition hover:bg-white">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#82909d]">Typology</span>
-                  <select value={type} onChange={(event) => setType(event.target.value)} className="w-full appearance-none bg-transparent text-sm font-medium text-[#182531] outline-none">
-                    <option>Any property</option>
-                    <option>Villa</option>
-                    <option>House</option>
-                    <option>Cottage</option>
-                  </select>
-                </label>
-                <label className="group flex flex-col gap-2 bg-white/95 px-5 py-4 transition hover:bg-white">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#82909d]">Price range</span>
-                  <select value={price} onChange={(event) => setPrice(event.target.value)} className="w-full appearance-none bg-transparent text-sm font-medium text-[#182531] outline-none">
-                    <option>Any price</option>
-                    <option>Under $8,000</option>
-                    <option>Premium homes</option>
-                  </select>
-                </label>
-                <button onClick={handleSearch} className="flex items-center justify-center gap-3 bg-[#3d6f9d] px-7 py-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white transition duration-200 hover:bg-[#2f5b84] active:scale-[0.98] sm:min-w-[142px]">
-                  <Search className="h-4 w-4" /> Search
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="absolute bottom-0 right-0 hidden h-28 w-[29%] border-l border-t border-white/10 lg:block" />
-        </section>
+      <section id="lifestyles" ref={lifestyleRef} className="overflow-hidden bg-[#f5f5f1] py-24 sm:py-32 lg:min-h-screen lg:py-0"><div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:flex lg:min-h-screen lg:items-center lg:px-12"><div className="shrink-0 pb-14 lg:w-[26vw] lg:pb-0"><SectionLabel>03 / Exploration</SectionLabel><h2 className="mt-6 max-w-[310px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.9] tracking-[-0.06em] sm:text-6xl">Find your kind of living.</h2><p className="mt-6 max-w-[250px] text-sm leading-6 text-[#7a858b]">Different lives ask for different rooms. Move through the possibilities.</p><div className="mt-10 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3d6f9d]"><MoveRight className="h-4 w-4" /> Drag / scroll</div></div><div ref={lifestyleTrackRef} className="flex w-full flex-col items-start gap-12 lg:w-max lg:flex-row lg:gap-10">{lifestyleCards.map((card, index) => <article key={card.number} className={`${card.width} shrink-0 ${index % 2 ? "lg:mt-20" : ""}`}><div className="relative aspect-[0.9] overflow-hidden bg-[#dbe1df]"><img loading="lazy" src={card.image} alt={`${card.title} architectural lifestyle`} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-[#122330]/65 via-transparent to-transparent" /><span className="absolute left-5 top-5 font-mono text-[10px] text-white/70">{card.number}</span><div className="absolute bottom-5 left-5 right-5 text-white"><h3 className="font-[Cormorant_Garamond] text-4xl tracking-[-0.05em]">{card.title}</h3><p className="mt-2 max-w-[220px] text-xs leading-5 text-white/70">{card.description}</p></div></div><button onClick={() => toast(`${card.title} is now your selected lifestyle.`)} className="mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#3d6f9d] hover:gap-3">Explore lifestyle <ArrowUpRight className="h-3.5 w-3.5" /></button></article>)}</div></div></section>
 
-        <section id="most-viewed" className="scroll-mt-6 bg-[#f5f5f1] px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
-          <div className="mx-auto max-w-[1320px]">
-            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <div>
-                <SectionLabel>Selected residences</SectionLabel>
-                <h2 className="mt-5 max-w-[590px] font-[Cormorant_Garamond] text-4xl font-medium leading-[0.98] tracking-[-0.055em] text-[#182531] sm:text-5xl lg:text-[4.35rem]">Most viewed, for good reason.</h2>
-              </div>
-              <div className="max-w-[285px] text-sm leading-6 text-[#7a858b] md:pb-1">
-                {hasSearched ? <span><span className="font-semibold text-[#182531]">{filteredProperties.length}</span> results shaped by your search.</span> : <span>Three places our community keeps coming back to.</span>}
-                <a href="#about" className="mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.17em] text-[#3d6f9d] hover:text-[#182531]">View all homes <ArrowRight className="h-3.5 w-3.5" /></a>
-              </div>
-            </div>
+      <section id="properties" className="scroll-mt-10 bg-[#182531] px-5 py-24 text-white sm:px-8 lg:px-12 lg:py-36"><div className="mx-auto max-w-[1440px]"><div className="flex flex-col justify-between gap-10 md:flex-row md:items-end"><div><SectionLabel light>04 / Imagination</SectionLabel><h2 className="mt-6 max-w-[690px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.88] tracking-[-0.065em] sm:text-7xl">Most viewed, for good reason.</h2></div><p className="max-w-[260px] text-sm leading-6 text-white/55">Editorially selected residences. Real places, presented with room to imagine.</p></div><div className="mt-16 grid gap-12 lg:grid-cols-[1.25fr_0.8fr_0.95fr] lg:items-start lg:gap-8">{filteredProperties.map((property, index) => <article key={property.name} className={`${index === 1 ? "lg:mt-28" : index === 2 ? "lg:mt-12" : ""} group`}><div className="relative aspect-[0.82] overflow-hidden bg-[#2b3b46]"><img loading="lazy" src={property.image} alt={`${property.name} exterior`} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" /><div className="absolute inset-0 bg-gradient-to-t from-[#0e1b26]/75 via-transparent to-transparent" /><span className="absolute left-5 top-5 font-mono text-[10px] text-white/70">{property.number} / VIEW</span><button onClick={() => toggleSaved(property.name)} aria-label={`Save ${property.name}`} className={`absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm ${saved.includes(property.name) ? "bg-[#3d6f9d] text-white" : "bg-white/85 text-[#51616d]"}`}><Heart className={`h-4 w-4 ${saved.includes(property.name) ? "fill-current" : ""}`} /></button><div className="absolute bottom-5 left-5 right-5"><p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-white/55">{property.type} · {property.city}</p><h3 className="mt-2 font-[Cormorant_Garamond] text-4xl leading-none tracking-[-0.05em]">{property.name}</h3><p className="mt-4 font-[Cormorant_Garamond] text-2xl">{property.price}</p></div></div><button onClick={() => toast(`${property.name} selected`, { description: "A full property detail transition can be connected when real listings are available." })} className="mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a9c4d3] hover:gap-3 hover:text-white">Explore property <ArrowRight className="h-3.5 w-3.5" /></button></article>)}</div>{!filteredProperties.length && <p className="mt-14 border border-white/15 p-8 text-center text-sm text-white/60">No residences match those filters. Reset the search to restore the collection.</p>}</div></section>
 
-            <div className="mt-14 grid gap-7 md:grid-cols-3 lg:mt-20 lg:gap-8">
-              {filteredProperties.length ? filteredProperties.map((property, index) => (
-                <article key={property.name} className="group">
-                  <div className={`relative aspect-[1.16] overflow-hidden ${property.tone}`}>
-                    <img src={property.image} alt={`${property.name} exterior`} className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.04]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#10212f]/40 via-transparent to-transparent opacity-70" />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-[#536371]">0{index + 1} / featured</span>
-                    <button onClick={() => toggleSaved(property.name)} aria-label={`Save ${property.name}`} className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition ${saved.includes(property.name) ? "bg-[#3d6f9d] text-white" : "bg-white/85 text-[#52616b] hover:bg-white"}`}>
-                      <Heart className={`h-4 w-4 ${saved.includes(property.name) ? "fill-current" : ""}`} />
-                    </button>
-                  </div>
-                  <div className="flex items-start justify-between gap-5 border-b border-[#dce0dc] py-5">
-                    <div>
-                      <h3 className="font-[Cormorant_Garamond] text-2xl tracking-[-0.035em] text-[#182531] transition-colors group-hover:text-[#3d6f9d]">{property.name}</h3>
-                      <p className="mt-1.5 text-xs text-[#7a858b]">{property.city} <span className="mx-1 text-[#c1c8c8]">/</span> {property.type}</p>
-                    </div>
-                    <div className="shrink-0 text-right">
-                      <p className="font-[Cormorant_Garamond] text-xl tracking-[-0.04em] text-[#182531]">{property.price}</p>
-                      <p className="mt-1 text-[10px] text-[#8a9396]">{property.period}</p>
-                    </div>
-                  </div>
-                  <button onClick={() => toast(`${property.name} added to your viewing list`, { description: "We’ll keep the details ready for your next step." })} className="mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3d6f9d] transition-all hover:gap-3 hover:text-[#182531]">View residence <ArrowRight className="h-3.5 w-3.5" /></button>
-                </article>
-              )) : (
-                <div className="col-span-full border border-dashed border-[#cbd4d2] bg-white/50 px-8 py-16 text-center">
-                  <p className="font-[Cormorant_Garamond] text-3xl text-[#182531]">Nothing quite fits yet.</p>
-                  <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#7a858b]">Try a broader city, property type, or price range and we’ll bring the shortlist back into view.</p>
-                  <button onClick={() => { setCity("All cities"); setType("Any property"); setPrice("Any price"); }} className="mt-6 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3d6f9d]">Reset filters</button>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
+      <section ref={dayRef} id="day" className="relative min-h-[140svh] overflow-hidden bg-[#111d27] text-white"><img ref={dayImageRef} src={dayFrames[0].image} alt="Quiet architectural interior transitioning through the day" className="absolute inset-0 h-full w-full object-cover object-center opacity-80" /><div className="absolute inset-0 bg-[#10202c]/45" /><div className="absolute inset-0 bg-gradient-to-r from-[#0e1a24]/85 via-[#0e1a24]/25 to-[#0e1a24]/40" /><div className="relative mx-auto flex min-h-[100svh] max-w-[1440px] items-center px-5 py-28 sm:px-8 lg:px-12"><div className="max-w-[630px]"><SectionLabel light>05 / Imagination</SectionLabel><p className="mt-10 font-mono text-xs tracking-[0.16em] text-white/60"><span ref={dayTimeRef}>{dayFrames[0].time}</span></p><h2 ref={dayTitleRef} className="mt-5 font-[Cormorant_Garamond] text-6xl font-medium leading-[0.85] tracking-[-0.07em] sm:text-8xl">{dayFrames[0].title}</h2><p ref={dayCopyRef} className="mt-7 max-w-[330px] text-sm leading-7 text-white/65">{dayFrames[0].copy}</p></div></div><div className="absolute bottom-10 left-5 right-5 flex items-end justify-between sm:left-8 sm:right-8 lg:left-12 lg:right-12"><div><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/50">A day in your new home</p><p className="mt-2 text-[10px] text-white/45">Scroll controls the timeline</p></div><span className="font-mono text-[10px] text-white/50">01 — 05</span></div></section>
 
-        <section id="about" className="scroll-mt-6 bg-[#e9eeed] px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
-          <div className="mx-auto grid max-w-[1320px] items-center gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-24">
-            <div className="relative order-2 lg:order-1">
-              <div className="absolute -left-5 -top-5 h-24 w-24 border-l border-t border-[#8ca2aa]" />
-              <div className="relative aspect-[0.92] overflow-hidden bg-[#bdc9c8]">
-                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85" alt="Minimal living room with warm natural light" className="h-full w-full object-cover" />
-                <div className="absolute bottom-5 left-5 flex items-center gap-3 bg-[#f5f5f1]/90 px-4 py-3 backdrop-blur-sm">
-                  <HomeIcon className="h-4 w-4 text-[#3d6f9d]" />
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#52616b]">A better way home</span>
-                </div>
-              </div>
-              <div className="absolute -bottom-5 -right-5 h-24 w-24 border-b border-r border-[#8ca2aa]" />
-            </div>
-            <div className="order-1 lg:order-2">
-              <SectionLabel>The simplest method</SectionLabel>
-              <h2 className="mt-6 max-w-[600px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.95] tracking-[-0.06em] text-[#182531] sm:text-6xl">The easiest method to find a house.</h2>
-              <p className="mt-7 max-w-[490px] text-sm leading-7 text-[#6d7b81] sm:text-[15px]">Finding a place to live should not feel like sorting through noise. RentHomes brings the details that matter into one quiet, useful view, so you can spend less time searching and more time imagining the life inside.</p>
-              <div className="mt-10 flex flex-wrap items-center gap-6">
-                <button onClick={() => document.querySelector("#steps")?.scrollIntoView({ behavior: "smooth" })} className="inline-flex items-center gap-3 rounded-full bg-[#182531] px-6 py-3.5 text-[10px] font-semibold uppercase tracking-[0.17em] text-white transition duration-200 hover:bg-[#3d6f9d] active:scale-[0.97]">Our approach <ArrowRight className="h-3.5 w-3.5" /></button>
-                <span className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7d898d]"><BedDouble className="h-4 w-4 text-[#3d6f9d]" /> Across the US & Europe</span>
-              </div>
-            </div>
-          </div>
-        </section>
+      <section className="bg-[#e7ecea] px-5 py-24 sm:px-8 lg:px-12 lg:py-36"><div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><div><SectionLabel>06 / Attention</SectionLabel><h2 className="mt-6 max-w-[470px] font-[Cormorant_Garamond] text-6xl font-medium leading-[0.86] tracking-[-0.07em]">Inside the details.</h2><p className="mt-7 max-w-[350px] text-sm leading-6 text-[#708087]">Architecture becomes personal in the small decisions. Tap a point of view.</p><div className="mt-10 border-t border-[#cbd5d1]">{detailItems.map((item) => <button key={item.id} onClick={() => setActiveDetail(item.id)} className={`flex w-full items-center justify-between border-b border-[#cbd5d1] py-4 text-left text-[10px] font-semibold uppercase tracking-[0.16em] transition ${activeDetail === item.id ? "text-[#3d6f9d]" : "text-[#829095] hover:text-[#182531]"}`}><span>{item.label}</span><ArrowRight className={`h-3.5 w-3.5 transition-transform ${activeDetail === item.id ? "translate-x-1" : ""}`} /></button>)}</div></div><div className="relative aspect-[1.1] overflow-hidden bg-[#bac7c5]"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1800&q=85" alt="Architectural interior with natural light and considered materials" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-[#0e2735]/10" />{detailItems.map((item) => <button key={item.id} onClick={() => setActiveDetail(item.id)} aria-label={`Explore ${item.label}`} className={`absolute ${item.position} flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[10px] font-semibold transition ${activeDetail === item.id ? "border-white bg-[#3d6f9d] text-white" : "border-white/70 bg-[#182531]/60 text-white/80 hover:bg-[#3d6f9d]"}`}>{item.label.slice(0, 1)}</button>)}<div className="absolute bottom-5 left-5 right-5 bg-[#f5f5f1]/90 p-5 backdrop-blur-sm"><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#3d6f9d]">{detailItems.find((item) => item.id === activeDetail)?.label}</p><p className="mt-2 max-w-[380px] font-[Cormorant_Garamond] text-2xl leading-tight text-[#182531]">{detailItems.find((item) => item.id === activeDetail)?.copy}</p></div></div></div></section>
 
-        <section id="steps" className="scroll-mt-6 bg-[#f5f5f1] px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
-          <div className="mx-auto max-w-[1320px]">
-            <div className="grid gap-10 lg:grid-cols-[0.55fr_1.45fr] lg:gap-24">
-              <div>
-                <SectionLabel>Our work in 3 steps</SectionLabel>
-                <h2 className="mt-5 max-w-[390px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.95] tracking-[-0.06em] text-[#182531]">From search to keys.</h2>
-                <p className="mt-6 max-w-[300px] text-sm leading-6 text-[#7a858b]">A clear process for a decision that deserves your full attention.</p>
-              </div>
-              <div className="grid gap-0 border-t border-[#d6dcd9] sm:grid-cols-3 sm:border-l">
-                {steps.map((step) => {
-                  const Icon = step.icon;
-                  return (
-                    <div key={step.number} className="group border-b border-[#d6dcd9] px-0 py-8 sm:border-b-0 sm:border-r sm:px-7 sm:py-3 lg:px-9">
-                      <div className="flex items-center justify-between">
-                        <span className="font-[Cormorant_Garamond] text-4xl tracking-[-0.06em] text-[#a4b4b7] transition-colors group-hover:text-[#3d6f9d]">{step.number}</span>
-                        <Icon className="h-5 w-5 text-[#3d6f9d] transition-transform duration-200 group-hover:-translate-y-1" />
-                      </div>
-                      <h3 className="mt-12 font-[Cormorant_Garamond] text-2xl tracking-[-0.04em] text-[#182531]">{step.title}</h3>
-                      <p className="mt-4 text-sm leading-6 text-[#7a858b]">{step.body}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
+      <section id="locations" className="bg-[#172531] px-5 py-24 text-white sm:px-8 lg:px-12 lg:py-36"><div className="mx-auto max-w-[1440px]"><div className="grid gap-14 lg:grid-cols-[0.65fr_1.35fr] lg:items-end"><div><SectionLabel light>07 / Place</SectionLabel><h2 className="mt-6 max-w-[460px] font-[Cormorant_Garamond] text-6xl font-medium leading-[0.86] tracking-[-0.07em]">The places we call home.</h2><p className="mt-7 max-w-[320px] text-sm leading-6 text-white/55">A geographic point of view — not a directory. Each place holds a different way of living.</p><div className="mt-10 flex flex-wrap gap-2">{destinations.map((destination, index) => <button key={destination.city} onClick={() => setActiveDestination(index)} className={`border px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] transition ${index === activeDestination ? "border-[#8eafc0] bg-[#dce8ed] text-[#182531]" : "border-white/20 text-white/55 hover:border-white/60 hover:text-white"}`}>{destination.city}</button>)}</div></div><div className="grid gap-8 md:grid-cols-[1.25fr_0.75fr] md:items-end"><div className="relative aspect-[1.25] overflow-hidden bg-[#2a3b47]"><img src={destinations[activeDestination].image} alt={`${destinations[activeDestination].city} architectural atmosphere`} className="h-full w-full object-cover transition duration-500" /><div className="absolute inset-0 bg-gradient-to-t from-[#0d1a24]/75 to-transparent" /><div className="absolute bottom-5 left-5"><p className="font-mono text-[9px] tracking-[0.14em] text-white/55">{destinations[activeDestination].coordinate}</p><h3 className="mt-3 font-[Cormorant_Garamond] text-5xl tracking-[-0.05em]">{destinations[activeDestination].city}</h3></div></div><div className="border-t border-white/20 pt-5"><p className="font-[Cormorant_Garamond] text-3xl leading-tight text-white/90">{destinations[activeDestination].description}</p><button onClick={() => toast(`${destinations[activeDestination].city} selected`, { description: "Connect real availability here when location data is available." })} className="mt-8 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#b8d1dc]">Explore the place <ArrowUpRight className="h-3.5 w-3.5" /></button></div></div></div></div></section>
 
-        <section className="bg-[#182531] px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32">
-          <div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-12 md:flex-row md:items-end">
-            <div>
-              <SectionLabel light>Make room for what matters</SectionLabel>
-              <h2 className="mt-6 max-w-[650px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.94] tracking-[-0.06em] sm:text-6xl lg:text-[5.2rem]">Your next chapter starts with a better address.</h2>
-            </div>
-            <div className="md:pb-2">
-              <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="group flex items-center gap-4 rounded-full bg-[#dce8ed] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.17em] text-[#182531] transition duration-200 hover:bg-white active:scale-[0.97]">Start your search <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></button>
-            </div>
-          </div>
-        </section>
-      </main>
+      <section id="method" className="bg-[#f5f5f1] px-5 py-24 sm:px-8 lg:px-12 lg:py-36"><div className="mx-auto max-w-[1440px]"><div className="grid gap-12 lg:grid-cols-[0.55fr_1.45fr]"><div><SectionLabel>08 / Confidence</SectionLabel><h2 className="mt-6 max-w-[380px] font-[Cormorant_Garamond] text-6xl font-medium leading-[0.86] tracking-[-0.07em]">The easiest method to find a house.</h2></div><div><p className="max-w-[430px] text-sm leading-6 text-[#78858a]">A five-part journey designed to make a meaningful decision feel clear.</p><div className="relative mt-16 border-t border-[#ccd5d2] pt-8"><span ref={methodLineRef} className="absolute left-0 top-[-1px] h-px w-full origin-left scale-x-0 bg-[#3d6f9d]" /><div className="grid gap-0 sm:grid-cols-5">{methodSteps.map((step, index) => <button key={step[0]} onClick={() => setActiveMethod(index)} className={`border-l border-[#ccd5d2] px-4 py-3 text-left transition first:border-l-0 sm:min-h-[180px] sm:px-5 ${activeMethod === index ? "bg-[#e6ecea]" : "hover:bg-[#edf0ed]"}`}><span className={`font-mono text-[10px] ${activeMethod === index ? "text-[#3d6f9d]" : "text-[#9aa6a6]"}`}>{step[0]}</span><h3 className={`mt-12 font-[Cormorant_Garamond] text-2xl ${activeMethod === index ? "text-[#182531]" : "text-[#778387]"}`}>{step[1]}</h3><p className="mt-2 text-[11px] leading-5 text-[#899497]">{step[2]}</p></button>)}</div></div></div></div></div></section>
 
-      <footer className="bg-[#f5f5f1] px-5 py-10 sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-[1320px] flex-col gap-7 border-t border-[#d9dfdc] pt-8 md:flex-row md:items-center md:justify-between">
-          <Logo />
-          <div className="flex flex-wrap gap-5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#7a858b]">
-            <button onClick={() => toast("Privacy information is available on request.")}>Privacy</button>
-            <button onClick={() => toast("Terms information is available on request.")}>Terms</button>
-            <button onClick={() => toast("hello@rent-homes.example")}>Contact</button>
-          </div>
-          <p className="text-[10px] uppercase tracking-[0.13em] text-[#a0a9a8]">© 2026 RentHomes</p>
-        </div>
-      </footer>
-    </div>
-  );
+      <section className="bg-[#eef1ef] px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-[1440px]"><div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end"><div><SectionLabel>09 / Decision</SectionLabel><h2 className="mt-6 max-w-[750px] font-[Cormorant_Garamond] text-6xl font-medium leading-[0.84] tracking-[-0.07em] sm:text-8xl">What makes a home feel right?</h2></div><p className="max-w-[250px] text-sm leading-6 text-[#7b898e]">Not every answer is visible at first glance.</p></div><div className="mt-20 grid border-t border-[#cdd6d3] sm:grid-cols-2 lg:grid-cols-3">{feelWords.map(([word, sub], index) => <button key={word} onClick={() => toast(`${word}: ${sub}`)} className="group border-b border-[#cdd6d3] px-0 py-8 text-left sm:px-7 lg:px-9"><span className="font-mono text-[10px] text-[#98a5a7]">0{index + 1}</span><span className="mt-8 block font-[Cormorant_Garamond] text-4xl tracking-[-0.05em] text-[#708087] transition group-hover:text-[#182531] sm:text-5xl">{word}</span><span className="mt-2 block text-[10px] font-semibold uppercase tracking-[0.15em] text-[#3d6f9d] opacity-0 transition group-hover:opacity-100">{sub}</span></button>)}</div></div></section>
+
+      <section className="bg-[#f5f5f1] px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto grid max-w-[1440px] gap-12 border-y border-[#d5dcd9] py-14 lg:grid-cols-[0.5fr_1.5fr] lg:py-20"><div><SectionLabel>10 / Reflection</SectionLabel><p className="mt-6 max-w-[210px] text-xs leading-6 text-[#7b898e]">Stories from people who found home belong here when real stories are available.</p></div><div><p className="max-w-[830px] font-[Cormorant_Garamond] text-4xl leading-[0.95] tracking-[-0.05em] text-[#182531] sm:text-6xl">We leave space for the voices of the people who live in these places — never inventing what has not been said.</p><button onClick={() => toast("Real resident stories can be connected when approved testimonials are available.")} className="mt-10 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3d6f9d]">Add a real story <ArrowRight className="h-3.5 w-3.5" /></button></div></div></section>
+
+      <section className="relative overflow-hidden bg-[#142331] px-5 py-28 text-white sm:px-8 lg:min-h-[78svh] lg:px-12 lg:py-36"><div className="absolute inset-0 opacity-25"><img src={HERO_IMAGE} alt="" className="h-full w-full object-cover" /></div><div className="absolute inset-0 bg-[#142331]/75" /><div className="relative mx-auto flex max-w-[1440px] flex-col justify-between gap-14 lg:min-h-[48svh] lg:flex-row lg:items-end"><div><SectionLabel light>11 / Home</SectionLabel><h2 className="mt-6 max-w-[900px] font-[Cormorant_Garamond] text-6xl font-medium leading-[0.84] tracking-[-0.07em] sm:text-8xl lg:text-[9rem]">Your next chapter starts with a better address.</h2></div><button onClick={start} className="group flex shrink-0 items-center gap-4 rounded-full bg-[#dce8ed] px-7 py-4 text-[10px] font-semibold uppercase tracking-[0.17em] text-[#182531] transition hover:bg-white active:scale-[0.97]">Find your home <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></button></div></section>
+    </main>
+
+    <footer className="bg-[#f5f5f1] px-5 py-10 sm:px-8 lg:px-12"><div className="mx-auto flex max-w-[1440px] flex-col gap-8 border-t border-[#d6dcd9] pt-8 md:flex-row md:items-center md:justify-between"><Logo /><p className="text-[10px] uppercase tracking-[0.14em] text-[#899497]">Find a place worth coming home to.</p><div className="flex gap-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#7a858b]"><button onClick={() => toast("Privacy information is available on request.")}>Privacy</button><button onClick={() => toast("Terms information is available on request.")}>Terms</button><button onClick={() => toast("hello@rent-homes.example")}>Contact</button></div><p className="text-[10px] uppercase tracking-[0.13em] text-[#a0a9a8]">© 2026 RentHomes</p></div></footer>
+  </div>;
 }
