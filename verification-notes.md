@@ -99,3 +99,7 @@ The earlier mobile card reveal was too subtle and did not create a complete scro
 ## Restore desktop and mobile horizontal Exploration — 2026-08-24
 
 The previous mobile vertical pin was removed because it did not match the requested interaction. Mobile 03 / Exploration now uses a pinned horizontal track that translates from right to left through the five lifestyle cards across a longer internal scroll distance. The desktop branch remains the original horizontal pinned gallery with its prior `lg:` layout geometry, card widths, spacing, and travel calculation; the mobile-only branch is isolated behind the existing breakpoint condition. Anchor spacing, lazy-image refresh, and section handoff remain intact. Typecheck/build pass, responsive previews were inspected, and the browser console is clean.
+
+## Responsive mobile 03 / Exploration viewport — 2026-08-24
+
+Refined the mobile Exploration composition so the copy remains within the viewport at the top of the pinned section and the active lifestyle image uses a responsive `78vw` card width with a viewport-safe bottom track. Mobile keeps the requested right-to-left horizontal pin and continues into 04 / Imagination. Desktop keeps its original `lg:` geometry, spacing, card widths, and horizontal pin. Typecheck and production build pass; phone and desktop full-page previews were captured; the Exploration anchor was inspected; and the browser console remained clean.

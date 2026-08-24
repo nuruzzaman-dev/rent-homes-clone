@@ -190,3 +190,10 @@
 - [x] Implement mobile pinned right-to-left horizontal card travel with stable width and handoff.
 - [x] Verify mobile/tablet/desktop screenshots, scroll behavior, build health, and console output.
 - [x] Save the corrected Exploration checkpoint.
+
+## Responsive mobile 03 / Exploration viewport
+- [x] Reproduce the mobile copy and image overflow at the Exploration anchor.
+- [x] Fit the Exploration copy and current horizontal image card inside the mobile viewport without changing desktop geometry.
+- [x] Preserve pinned right-to-left travel and reliable section handoff.
+- [x] Verify phone/tablet/desktop previews, build health, and console output.
+- [x] Save the responsive Exploration checkpoint.
