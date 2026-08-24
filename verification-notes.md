@@ -87,3 +87,7 @@ The previous mobile Immersion fix used a non-pinned scrub reveal, unlike 05 / Si
 ## Full mobile Immersion sequence — 2026-08-24
 
 Enabled the same complete 240-frame canvas renderer on mobile instead of the poster-only fallback. Mobile uses the existing ordered frame manifest, progressively warms frames in small batches, renders at the mobile canvas dimensions, pins for 1500px of internal travel, and maps scroll progress across 001 / 240. Verified in the preview by scrolling from the Immersion anchor to `240 / 240`; the final frame displayed and the section remained able to continue into 02 / Desire. Browser console remained clean and typecheck/build pass. Desktop branch and design were preserved.
+
+## Mobile 03 / Exploration animation fix — 2026-08-24
+
+Root cause: Exploration only had a desktop-only pinned horizontal ScrollTrigger; the mobile branch applied only the generic section reveal, so the lifestyle cards had no dedicated scroll choreography. Added a mobile-only scrubbed reveal for every lifestyle card using opacity, vertical movement, and scale, while retaining the existing desktop horizontal pin unchanged. Added `scroll-mt-10` for reliable anchor positioning and refresh ScrollTrigger measurements whenever a lazy-loaded lifestyle image completes, preventing section-height shifts from disrupting mobile scroll positions. Typecheck and production build pass; desktop and mobile full-page previews were inspected; the browser console remained clean.

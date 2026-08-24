@@ -169,3 +169,10 @@
 - [x] Preserve a poster/reduced-motion fallback for devices that cannot animate the full sequence.
 - [x] Verify mobile frame progression, loading behavior, pin release, desktop preservation, build health, and console status.
 - [ ] Save the full mobile sequence checkpoint.
+
+## Mobile 03 / Exploration animation fix
+- [x] Inspect the existing Exploration desktop and mobile ScrollTrigger branches and reproduce the mobile scroll failure.
+- [x] Add a mobile-safe Exploration animation path with stable section travel, visible card transitions, and no scroll dead-end.
+- [x] Preserve desktop Exploration layout and animation behavior.
+- [x] Verify mobile/tablet/desktop rendering, scroll progression, build health, and browser console status.
+- [x] Save the verified Exploration fix checkpoint.
