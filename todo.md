@@ -12,3 +12,21 @@
 - [x] Keep page-specific styling Tailwind-first and avoid adding an extra custom CSS stylesheet.
 - [x] Verify build health, console/network issues, responsive layouts, motion fallbacks, asset loading, and performance warnings. TypeScript and production builds pass; screenshots cover desktop/mobile; remaining warning is the standard bundle-size advisory.
 - [ ] Save one complete upgraded checkpoint and deliver the live project version.
+
+## Re-audit and precision-refactor gaps
+
+- [x] Compare every required section in the attached prompt against the rendered page and mark any content, labels, hierarchy, or section-order mismatch.
+- [x] Verify the hero implements 100svh, initial-load choreography, pinned scroll behavior, compressed search UI, changing overlay, and a visible scroll indicator.
+- [x] Verify the lifestyle gallery is truly vertically driven horizontal scrolling on desktop with dynamic measurements, and a simplified vertical composition on mobile.
+- [x] Verify the property discovery treatment includes editorial spreads, hover metadata reveal, active/inactive hierarchy, and meaningful selection behavior without fake navigation.
+- [x] Verify the day-in-home section is a scroll-controlled timeline with no autoplay, progressive image preparation, device-aware fallback, and reduced-motion static/fade behavior.
+- [x] Verify the details section has editorial hotspots with active crop/zoom/caption behavior rather than generic tooltip styling.
+- [x] Verify the locations section is explicitly editorial when no real availability data exists and does not imply fabricated statistics.
+- [x] Verify the method section behaves as a pinned continuous composition with active-step changes, progress movement, image/state transitions, and responsive fallback.
+- [x] Verify the search UI provides focused-field affordances, smooth active states, and premium non-Bootstrap treatment.
+- [x] Verify a minimal branded loader exists without an artificial delay or generic spinner.
+- [x] Verify custom cursor behavior is implemented desktop-only with mobile/touch/reduced-motion disablement.
+- [x] Verify the asset manifest covers every external image URL, license assumption, usage note, and production-hosting caveat.
+- [x] Verify exact attached copy, narrative sequence, reduced-motion behavior, semantic structure, focus states, alt text, and no fake testimonial/statistical claims.
+- [x] Re-run visual, interaction, console, network, performance, and production-build QA after refactoring. Desktop/mobile screenshots pass, the browser console is clean, interactions were exercised, and the only build note is the standard large-chunk advisory.
+- [ ] Save and publish a new checkpoint only after all required gaps are closed or explicitly documented as unavailable due to missing real assets/data.
