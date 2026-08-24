@@ -79,3 +79,12 @@
 - [x] Preserve layered crossfade, staggered copy transition, mobile fallback, and reduced-motion behavior.
 - [x] Re-run typecheck, production build, responsive screenshots, and browser-console QA.
 - [ ] Save the updated Signature checkpoint.
+
+## Attention section 100vh refinement
+
+- [x] Keep 06 / Attention within a 100vh visual presentation on desktop and mobile.
+- [x] Preserve the editorial hotspot list, active crop/zoom state, and caption transition.
+- [x] Fit the image and controls into the compact viewport without clipping or reducing accessibility.
+- [x] Preserve mobile and reduced-motion fallbacks.
+- [x] Re-run typecheck, production build, responsive screenshots, and browser-console QA.
+- [ ] Save the updated Attention checkpoint.

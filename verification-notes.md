@@ -51,3 +51,7 @@ The Signature experience and What matters now use more internal scroll breathing
 ## Signature experience slower smoothness pass — 2026-08-24
 
 The Signature experience now has stronger per-state breathing room: five states are distributed across 1800px of pinned scrub travel, with `2.05` seconds of scrub smoothing and gentle state snapping after scroll pauses. State selection uses rounded thresholds so the five moments land deliberately, while layered image crossfades and staggered copy transitions remain calm. The visible composition stays `100svh`; only the internal scroll travel is longer. Mobile and reduced-motion paths remain non-pinned. Typecheck and production build pass, desktop/mobile screenshots were captured, and the browser console is clean. The standard large-chunk advisory remains the only build note.
+
+## Attention section 100vh refinement — 2026-08-24
+
+Section 06 / Attention now presents as a compact `100svh` composition on desktop, with a responsive min-height fallback on smaller screens. The detail selector list, active hotspot, image crop/scale treatment, and caption remain intact while the tighter layout prevents unnecessary vertical expansion. Desktop and mobile full-page captures were taken after the refactor. Typecheck and production build pass, and the browser console is clean; the only build note is the standard large-chunk advisory.
