@@ -149,3 +149,13 @@
 - [x] Preserve desktop canvas scrubbing, pinning, and handoff behavior exactly.
 - [x] Verify the section on phone and desktop, then run typecheck/build/console QA.
 - [ ] Save the Immersion animation checkpoint.
+
+## Mobile pinned Immersion correction
+
+- [x] Compare the working 05 / Signature pin trigger with the current mobile 02 / Immersion path.
+- [x] Add a mobile pinned scrub timeline for the Immersion poster and content instead of relying only on a reveal.
+- [x] Keep the mobile section at 100vh, with a stable poster image and restrained text/marker transitions.
+- [x] Ensure the pin releases smoothly into 02 / Desire without a dead end.
+- [x] Preserve desktop 240-frame canvas behavior and desktop design unchanged.
+- [x] Verify on mobile and desktop, then run typecheck/build/console QA.
+- [ ] Save the pinned Immersion checkpoint.

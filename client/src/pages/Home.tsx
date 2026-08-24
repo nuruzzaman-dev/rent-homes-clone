@@ -185,10 +185,10 @@ export default function Home() {
           const copy = cinematicRef.current.querySelector("[data-mobile-immersion-copy]");
           const markers = cinematicRef.current.querySelector("[data-mobile-immersion-markers]");
           if (poster && copy && markers) {
-            gsap.timeline({ scrollTrigger: { trigger: cinematicRef.current, start: "top 88%", end: "bottom 28%", scrub: 0.85, invalidateOnRefresh: true } })
-              .fromTo(poster, { scale: 1.08, opacity: 0.72 }, { scale: 1, opacity: 1, duration: 0.55, ease: "power2.out" }, 0)
-              .fromTo(copy, { opacity: 0.25, y: 34 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.08)
-              .fromTo(markers, { opacity: 0.18, y: 18 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.42);
+            gsap.timeline({ scrollTrigger: { trigger: cinematicRef.current, start: "top top", end: "+=1200", pin: true, pinSpacing: true, scrub: 1.45, anticipatePin: 1, invalidateOnRefresh: true } })
+              .fromTo(poster, { scale: 1.1, opacity: 0.62 }, { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }, 0)
+              .fromTo(copy, { opacity: 0.2, y: 44 }, { opacity: 1, y: 0, duration: 0.68, ease: "power3.out" }, 0.12)
+              .fromTo(markers, { opacity: 0.15, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.52);
           }
         }
         if (dayRef.current) {

@@ -79,3 +79,7 @@ Root cause: the main effect defined `desktopMotion` as `(min-width: 1024px) and 
 ## Mobile Immersion animation fix — 2026-08-24
 
 Root cause: mobile intentionally skipped the desktop canvas branch, and the previous mobile fallback only had a generic section reveal, so the 02 / Immersion poster and internal content had no dedicated, visible animation choreography. Added explicit mobile targets for the poster, copy, and Exterior → Interior → Room markers, with a non-pinned scrubbed reveal and poster scale/opacity transition. The desktop 240-frame canvas branch remains unchanged. The mobile Immersion anchor was inspected in the preview, the poster and copy rendered correctly, and the browser console was clean. Typecheck and production build pass.
+
+## Mobile pinned Immersion correction — 2026-08-24
+
+The previous mobile Immersion fix used a non-pinned scrub reveal, unlike 05 / Signature, so it did not match the requested interaction pattern. Replaced that mobile path with a dedicated pinned GSAP timeline: 100svh poster composition, `top top` pinning, 1200px internal travel, 1.45 scrub smoothing, poster scale/opacity, copy reveal, and marker reveal. The desktop 240-frame canvas branch was not changed. The mobile Immersion anchor renders correctly in preview and the browser console is clean; typecheck/build pass.
