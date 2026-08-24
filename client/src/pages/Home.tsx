@@ -253,41 +253,20 @@ export default function Home() {
       }
       if (mobileMotion && lifestyleRef.current && lifestyleTrackRef.current) {
         const track = lifestyleTrackRef.current;
-        const cards = gsap.utils.toArray<HTMLElement>("#lifestyles article");
-        const travel = () => Math.max(0, track.scrollHeight - window.innerHeight * 0.62);
-        gsap.set(cards, { autoAlpha: 0.9, scale: 0.985 });
+        const travel = () => Math.max(0, track.scrollWidth - window.innerWidth + 24);
         gsap.to(track, {
-          y: () => -travel(),
+          x: () => -travel(),
           ease: "none",
           scrollTrigger: {
             trigger: lifestyleRef.current,
             start: "top top",
-            end: () => `+=${Math.max(1500, travel() + window.innerHeight * 0.35)}`,
+            end: () => `+=${Math.max(1400, travel() + window.innerHeight * 0.35)}`,
             pin: true,
             pinSpacing: true,
             scrub: 1.35,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            onEnter: () => gsap.to(cards[0], { autoAlpha: 1, scale: 1, duration: 0.4, overwrite: true }),
-            onLeave: () => gsap.to(cards[cards.length - 1], { autoAlpha: 1, scale: 1, duration: 0.4, overwrite: true }),
-            onEnterBack: () => gsap.set(cards, { autoAlpha: 0.9, scale: 0.985 }),
           },
-        });
-        cards.forEach((card, index) => {
-          gsap.to(card, {
-            autoAlpha: 1,
-            scale: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: undefined,
-              start: "top 82%",
-              end: "top 58%",
-              scrub: 0.75,
-              invalidateOnRefresh: true,
-            },
-          });
-          if (index === 0) gsap.set(card, { autoAlpha: 1, scale: 1 });
         });
       }
       if (dayRef.current && dayImageRef.current && dayNextImageRef.current && dayTimeRef.current && dayTitleRef.current && dayCopyRef.current && !reduced) {
@@ -353,7 +332,7 @@ export default function Home() {
 
 
 
-      <section id="lifestyles" ref={lifestyleRef} className="scroll-mt-10 min-h-[100svh] overflow-hidden bg-[#f5f5f1] py-20 sm:py-32 lg:min-h-screen lg:py-0"><div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:flex lg:min-h-screen lg:items-center lg:px-12"><div className="relative z-10 shrink-0 bg-[#f5f5f1] pb-14 lg:w-[26vw] lg:bg-transparent lg:pb-0"><SectionLabel>03 / Exploration</SectionLabel><h2 className="mt-6 max-w-[310px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.9] tracking-[-0.06em] sm:text-6xl">Find your kind of living.</h2><p className="mt-6 max-w-[250px] text-sm leading-6 text-[#7a858b]">Different lives ask for different rooms. Move through the possibilities.</p><div className="mt-10 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3d6f9d]"><MoveRight className="h-4 w-4" /> Drag / scroll</div></div><div ref={lifestyleTrackRef} data-cursor="DRAG" className="flex w-full flex-col items-start gap-12 lg:w-max lg:flex-row lg:gap-10">{lifestyleCards.map((card, index) => <article key={card.number} className={`${card.width} group shrink-0 ${index % 2 ? "lg:mt-20" : ""}`}>
+      <section id="lifestyles" ref={lifestyleRef} className="scroll-mt-10 min-h-[100svh] overflow-hidden bg-[#f5f5f1] py-20 sm:py-32 lg:min-h-screen lg:py-0"><div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:flex lg:min-h-screen lg:items-center lg:px-12"><div className="shrink-0 bg-[#f5f5f1] pb-14 lg:w-[26vw] lg:bg-transparent lg:pb-0"><SectionLabel>03 / Exploration</SectionLabel><h2 className="mt-6 max-w-[310px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.9] tracking-[-0.06em] sm:text-6xl">Find your kind of living.</h2><p className="mt-6 max-w-[250px] text-sm leading-6 text-[#7a858b]">Different lives ask for different rooms. Move through the possibilities.</p><div className="mt-10 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3d6f9d]"><MoveRight className="h-4 w-4" /> Drag / scroll</div></div><div ref={lifestyleTrackRef} data-cursor="DRAG" className="flex w-max flex-row items-start gap-8 lg:gap-10">{lifestyleCards.map((card, index) => <article key={card.number} className={`w-[82vw] ${card.width} group shrink-0 ${index % 2 ? "lg:mt-20" : ""}`}>
 <div className="relative aspect-[0.9] overflow-hidden bg-[#dbe1df]"><img loading="lazy" decoding="async" src={card.image} alt={`${card.title} architectural lifestyle`} onLoad={() => ScrollTrigger.refresh()} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-[#122330]/65 via-transparent to-transparent" /><span className="absolute left-5 top-5 font-mono text-[10px] text-white/70">{card.number}</span><div className="absolute bottom-5 left-5 right-5 text-white"><h3 className="font-[Cormorant_Garamond] text-4xl tracking-[-0.05em]">{card.title}</h3><p className="mt-2 max-w-[220px] text-xs leading-5 text-white/70">{card.description}</p></div></div><button onClick={() => toast(`${card.title} is now your selected lifestyle.`)} className="mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#3d6f9d] hover:gap-3">Explore lifestyle <ArrowUpRight className="h-3.5 w-3.5" /></button></article>)}</div></div></section>
 
       <section id="properties" className="scroll-mt-10 bg-[#182531] px-4 py-20 text-white sm:px-8 sm:py-24 lg:px-12 lg:py-36"><div className="mx-auto max-w-[1440px]"><div className="flex flex-col justify-between gap-10 md:flex-row md:items-end"><div><SectionLabel light>04 / Imagination</SectionLabel><h2 className="mt-6 max-w-[690px] font-[Cormorant_Garamond] text-5xl font-medium leading-[0.88] tracking-[-0.065em] sm:text-7xl">Most viewed, for good reason.</h2></div><p className="max-w-[260px] text-sm leading-6 text-white/55">Editorially selected residences. Real places, presented with room to imagine.</p></div><div className="mt-16 grid gap-12 lg:grid-cols-[1.25fr_0.8fr_0.95fr] lg:items-start lg:gap-8">{filteredProperties.map((property, index) => <article key={property.name} data-cursor="VIEW" className={`${index === 1 ? "lg:mt-28" : index === 2 ? "lg:mt-12" : ""} group`}><div className="relative aspect-[0.82] overflow-hidden bg-[#2b3b46]"><img loading="lazy" decoding="async" src={property.image} alt={`${property.name} exterior`} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" /><div className="absolute inset-0 bg-gradient-to-t from-[#0e1b26]/75 via-transparent to-transparent" /><span className="absolute left-5 top-5 font-mono text-[10px] text-white/70">{property.number} / VIEW</span><button onClick={() => toggleSaved(property.name)} aria-label={`Save ${property.name}`} className={`absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm ${saved.includes(property.name) ? "bg-[#3d6f9d] text-white" : "bg-white/85 text-[#51616d]"}`}><Heart className={`h-4 w-4 ${saved.includes(property.name) ? "fill-current" : ""}`} /></button><div className="absolute bottom-5 left-5 right-5 lg:opacity-0 lg:transition-opacity lg:duration-500 lg:group-hover:opacity-100"><p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-white/55">{property.type} · {property.city}</p><h3 className="mt-2 font-[Cormorant_Garamond] text-4xl leading-none tracking-[-0.05em]">{property.name}</h3><p className="mt-4 font-[Cormorant_Garamond] text-2xl">{property.price}</p></div></div><button data-cursor="OPEN" onClick={() => toast(`${property.name} selected`, { description: "A full property detail transition can be connected when real listings are available." })} className="mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a9c4d3] hover:gap-3 hover:text-white">Explore property <ArrowRight className="h-3.5 w-3.5" /></button></article>)}</div>{!filteredProperties.length && <p className="mt-14 border border-white/15 p-8 text-center text-sm text-white/60">No residences match those filters. Reset the search to restore the collection.</p>}</div></section>

@@ -183,3 +183,10 @@
 - [x] Preserve desktop horizontal pinning and visual composition.
 - [x] Validate phone/tablet/desktop scroll behavior, build health, and console output.
 - [x] Save the completed Exploration checkpoint.
+
+## Restore desktop and mobile horizontal Exploration
+- [x] Confirm the last mobile pinned refactor changed the base section classes and isolate those changes to mobile only.
+- [x] Restore the desktop Exploration section geometry and horizontal pin exactly.
+- [x] Implement mobile pinned right-to-left horizontal card travel with stable width and handoff.
+- [x] Verify mobile/tablet/desktop screenshots, scroll behavior, build health, and console output.
+- [x] Save the corrected Exploration checkpoint.
