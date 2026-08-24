@@ -131,3 +131,12 @@
 - [x] Add or refine touch-friendly focus/active states and reduced-motion behavior.
 - [x] Verify representative phone, tablet, and desktop screenshots plus browser-console/build health.
 - [ ] Save the responsive checkpoint.
+
+## Mobile animation debugging
+
+- [x] Identify why mobile motion is gated, skipped, hidden, or not visibly progressing.
+- [x] Check reduced-motion detection, desktop breakpoint conditions, mobile poster/canvas fallbacks, and GSAP lifecycle cleanup.
+- [x] Restore appropriate mobile entrance and scroll-driven animations without enabling desktop-only pinning or 240-frame canvas loading on phones.
+- [x] Verify phone and tablet motion behavior, reduced-motion behavior, and unchanged desktop animation behavior.
+- [x] Re-run typecheck, production build, screenshots, and browser-console QA.
+- [ ] Save the mobile animation fix checkpoint.

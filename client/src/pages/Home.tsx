@@ -160,6 +160,7 @@ export default function Home() {
     const ctx = gsap.context(() => {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const desktopMotion = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)").matches;
+      const mobileMotion = window.matchMedia("(max-width: 1023px) and (prefers-reduced-motion: no-preference)").matches;
       if (cursorRef.current && window.matchMedia("(pointer: fine) and (min-width: 1024px)").matches && !reduced) {
         const cursor = cursorRef.current;
         const moveX = gsap.quickTo(cursor, "x", { duration: 0.18, ease: "power3.out" });
@@ -175,6 +176,19 @@ export default function Home() {
       }
       gsap.fromTo("[data-reveal]", { opacity: 0, y: reduced ? 0 : 26 }, { opacity: 1, y: 0, duration: reduced ? 0.2 : 0.9, stagger: reduced ? 0 : 0.08, ease: "power3.out", delay: reduced ? 0 : 0.15 });
       if (heroImageRef.current && !reduced) gsap.fromTo(heroImageRef.current, { scale: 1.08 }, { scale: 1, duration: 2.1, ease: "power3.out" });
+      if (mobileMotion) {
+        gsap.utils.toArray<HTMLElement>("main > section").forEach((section) => {
+          gsap.fromTo(section, { autoAlpha: 0.01, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.75, ease: "power3.out", scrollTrigger: { trigger: section, start: "top 88%", toggleActions: "play none none reverse" } });
+        });
+        if (cinematicRef.current) {
+          const poster = cinematicRef.current.querySelector("img");
+          if (poster) gsap.fromTo(poster, { scale: 1.06 }, { scale: 1, duration: 1.35, ease: "power3.out", scrollTrigger: { trigger: cinematicRef.current, start: "top 82%", toggleActions: "play none none reverse" } });
+        }
+        if (dayRef.current) {
+          const dayImage = dayRef.current.querySelector("img");
+          if (dayImage) gsap.fromTo(dayImage, { scale: 1.04 }, { scale: 1, duration: 1.4, ease: "power3.out", scrollTrigger: { trigger: dayRef.current, start: "top 82%", toggleActions: "play none none reverse" } });
+        }
+      }
       if (cinematicRef.current && cinematicCanvasRef.current && desktopMotion) {
         const canvas = cinematicCanvasRef.current;
         const context = canvas.getContext("2d");

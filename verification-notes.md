@@ -71,3 +71,7 @@ Moved `02 / Immersion` directly below the hero. `02 / Desire` now follows the ci
 ## Mobile-first responsive pass — 2026-08-24
 
 Refined only base/mobile and tablet utility values while preserving existing `lg:` desktop composition and desktop GSAP behavior. The phone layout now uses safer horizontal padding, a readable fluid hero heading, stacked full-width search fields, compact viewport spacing, touch-sized menu controls, and non-canvas cinematic poster behavior. Tablet capture confirms the intermediate layout remains legible and the desktop capture remains visually consistent. Typecheck and production build pass; the browser console is clean. The only build note is the existing large-chunk advisory.
+
+## Mobile animation fix — 2026-08-24
+
+Root cause: the main effect defined `desktopMotion` as `(min-width: 1024px) and (prefers-reduced-motion: no-preference)`, and the cinematic canvas, pinned day timeline, pinned method, and pinned What matters timelines were intentionally guarded by that condition. On phones and tablets, only the initial reveal animation and a few non-pinned progress effects could run, so the mobile experience appeared static. Added a separate `mobileMotion` path that provides lightweight section reveal animations and subtle poster/image scale-in for the cinematic and day sections, while keeping desktop pinning, custom cursor, and canvas sequence loading unchanged. Typecheck/build pass, phone and desktop captures pass, and browser console is clean.
