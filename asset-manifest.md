@@ -25,3 +25,9 @@
 ## Production notes
 
 The current implementation contains no fabricated testimonials, customer ratings, user counts, or sales statistics. Property names, prices, and cities are clearly presented as editorial concept content until connected to an approved real listing source. The day section is explicitly a scroll-controlled, five-still art-directed transition rather than a falsely continuous 60–100 frame sequence. Before a commercial launch, download and optimize approved assets into the project lifecycle storage, confirm the current source license for each external image, and remove any source that fails commercial-use or private-property review.
+
+## New exterior-to-interior immersion sequence
+
+The new section below 02 / Desire uses `client/src/lib/renthomes-sequence.json`, which contains 240 ordered webdev storage paths (`frame_0001` through `frame_0240`). The frames were extracted at 30 fps from the generated 8-second architectural source clip `/home/ubuntu/webdev-static-assets/rent-homes-exterior-to-interior.mp4`, resized to 1280px wide, and encoded as WebP at quality 78. The frontend renders the sequence through a single canvas and progressively loads the first 24 frames plus the current and next frame during scroll; mobile and reduced-motion paths use the approved hero poster instead.
+
+The source clip was generated specifically for this RentHomes project using the built-in media generation workflow and the existing hero image as a visual reference. No third-party stock license is asserted for these generated frames. The generated storage paths are lifecycle-bound to this webdev project and must remain referenced exactly as recorded in the JSON manifest. For production, retain the current poster fallback and consider replacing the generated sequence with approved final architectural footage if a rights-cleared brand film becomes available.

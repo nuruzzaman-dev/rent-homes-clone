@@ -55,3 +55,7 @@ The Signature experience now has stronger per-state breathing room: five states 
 ## Attention section 100vh refinement — 2026-08-24
 
 Section 06 / Attention now presents as a compact `100svh` composition on desktop, with a responsive min-height fallback on smaller screens. The detail selector list, active hotspot, image crop/scale treatment, and caption remain intact while the tighter layout prevents unnecessary vertical expansion. Desktop and mobile full-page captures were taken after the refactor. Typecheck and production build pass, and the browser console is clean; the only build note is the standard large-chunk advisory.
+
+## New exterior-to-interior cinematic sequence — 2026-08-24
+
+Added a new `02 / Immersion` section immediately below `02 / Desire`, preserving all existing sections after it. The section uses 240 uploaded WebP frames generated from one coherent 8-second exterior-to-interior architectural source clip. Desktop renders through one canvas with GSAP ScrollTrigger pinning and 2.4-second scrub smoothing; the frame counter updates from 001 / 240. The journey is framed as Exterior → Interior → Room. Mobile and reduced-motion paths use the hero poster and avoid forced sequence loading. Typecheck and production build pass, desktop/mobile captures were taken, and the browser console is clean. The standard large-chunk advisory remains the only build note.

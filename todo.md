@@ -88,3 +88,17 @@
 - [x] Preserve mobile and reduced-motion fallbacks.
 - [x] Re-run typecheck, production build, responsive screenshots, and browser-console QA.
 - [ ] Save the updated Attention checkpoint.
+
+## New exterior-to-interior cinematic sequence
+
+- [x] Add a new section immediately below 02 / Desire without changing the existing section order after it.
+- [x] Create one coherent architectural journey: exterior approach → threshold/entry → main interior → room detail.
+- [x] Generate or prepare 200+ consistently framed frames with stable lighting, camera direction, perspective, and crop.
+- [x] Use a pinned 100vh desktop presentation with scroll progress mapped to sequence frames.
+- [x] Use canvas or an equivalent efficient renderer instead of mounting 200+ visible image elements.
+- [x] Preload the first frames and progressively prepare the remaining frames with a poster fallback.
+- [x] Add restrained captions and progress treatment without competing with the existing RentHomes design.
+- [x] Provide mobile and reduced-motion fallbacks that avoid forced pinning or excessive frame loading.
+- [x] Document the new sequence assets, source assumptions, dimensions, and licensing in the asset manifest.
+- [x] Re-run typecheck, production build, responsive screenshots, interaction tests, and browser-console QA.
+- [ ] Save the new cinematic-section checkpoint.
