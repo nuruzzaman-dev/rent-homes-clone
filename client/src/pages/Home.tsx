@@ -180,7 +180,7 @@ export default function Home() {
       if (dayRef.current && dayImageRef.current && dayNextImageRef.current && dayTimeRef.current && dayTitleRef.current && dayCopyRef.current && !reduced) {
         const proxy = { progress: 0 };
         const updateDay = () => {
-          const index = Math.min(dayFrames.length - 1, Math.floor(proxy.progress * dayFrames.length));
+          const index = Math.min(dayFrames.length - 1, Math.round(proxy.progress * (dayFrames.length - 1)));
           if (index === dayFrameIndexRef.current) return;
           dayFrameIndexRef.current = index;
           const frame = dayFrames[index];
@@ -192,15 +192,15 @@ export default function Home() {
           back.src = frame.image;
           gsap.set(back, { autoAlpha: 0, scale: 1.035 });
           gsap.timeline({ defaults: { overwrite: true } })
-            .to([dayTimeRef.current, dayTitleRef.current, dayCopyRef.current], { autoAlpha: 0, y: 10, duration: 0.2, stagger: 0.035, ease: "power2.out" })
+            .to([dayTimeRef.current, dayTitleRef.current, dayCopyRef.current], { autoAlpha: 0, y: 10, duration: 0.3, stagger: 0.05, ease: "power2.out" })
             .set([dayTimeRef.current, dayTitleRef.current, dayCopyRef.current], { textContent: (index === 0 ? [frame.time, frame.title, frame.copy] : undefined) })
             .call(() => { if (dayTimeRef.current) dayTimeRef.current.textContent = frame.time; if (dayTitleRef.current) dayTitleRef.current.textContent = frame.title; if (dayCopyRef.current) dayCopyRef.current.textContent = frame.copy; })
-            .to(back, { autoAlpha: 0.8, scale: 1, duration: 0.85, ease: "power2.out" }, 0.2)
-            .to(front, { autoAlpha: 0.16, scale: 1.012, duration: 0.85, ease: "power2.out" }, 0.2)
-            .to([dayTimeRef.current, dayTitleRef.current, dayCopyRef.current], { autoAlpha: 1, y: 0, duration: 0.48, stagger: 0.055, ease: "power3.out" }, 0.48)
+            .to(back, { autoAlpha: 0.8, scale: 1, duration: 1.05, ease: "power2.out" }, 0.28)
+            .to(front, { autoAlpha: 0.16, scale: 1.012, duration: 1.05, ease: "power2.out" }, 0.28)
+            .to([dayTimeRef.current, dayTitleRef.current, dayCopyRef.current], { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.075, ease: "power3.out" }, 0.62)
             .call(() => { dayLayerRef.current = dayLayerRef.current === 0 ? 1 : 0; });
         };
-        gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: dayRef.current, start: "top top", end: "+=1400", pin: true, pinSpacing: true, scrub: 1.65, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: updateDay } });
+        gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: dayRef.current, start: "top top", end: "+=1800", pin: true, pinSpacing: true, scrub: 2.05, anticipatePin: 1, invalidateOnRefresh: true, snap: { snapTo: 1 / (dayFrames.length - 1), duration: { min: 0.55, max: 1.1 }, delay: 0.35, ease: "power2.out" }, onUpdate: updateDay } });
       }
       if (methodLineRef.current && methodRef.current && !reduced) gsap.fromTo(methodLineRef.current, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", ease: "none", scrollTrigger: { trigger: methodRef.current, start: "top 72%", end: "bottom 38%", scrub: 1 } });
       if (methodRef.current && desktopMotion) {

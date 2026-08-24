@@ -70,3 +70,12 @@
 - [x] Keep reduced-motion and mobile behavior stable.
 - [x] Re-run typecheck, production build, screenshots, and browser-console QA.
 - [ ] Save the smoother-scroll checkpoint.
+
+## Signature experience slower smoothness pass
+
+- [x] Give each of the five Signature states stronger hold zones without changing the visible 100vh section height.
+- [x] Slow the scrub response enough that fast wheel and trackpad gestures feel settled rather than rushed.
+- [x] Add gentle state snapping or threshold easing only if it improves calmness without causing jumps.
+- [x] Preserve layered crossfade, staggered copy transition, mobile fallback, and reduced-motion behavior.
+- [x] Re-run typecheck, production build, responsive screenshots, and browser-console QA.
+- [ ] Save the updated Signature checkpoint.

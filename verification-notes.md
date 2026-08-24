@@ -47,3 +47,7 @@ Section 10 / What matters now uses a `100svh` desktop presentation with a pinned
 ## Smooth scroll refinement — 2026-08-24
 
 The Signature experience and What matters now use more internal scroll breathing room while preserving their `100svh` visible compositions. Signature scrub travel increased to 1400px with a 1.65 scrub lag; What matters uses 1400px with a 1.75 scrub lag. What matters image transitions now ease through a slower opacity/scale crossfade, and click selection uses a slower crossfade as well. Desktop and mobile screenshots were captured after the update, typecheck and production build pass, and the browser console is clean. The build retains only the standard large-chunk advisory.
+
+## Signature experience slower smoothness pass — 2026-08-24
+
+The Signature experience now has stronger per-state breathing room: five states are distributed across 1800px of pinned scrub travel, with `2.05` seconds of scrub smoothing and gentle state snapping after scroll pauses. State selection uses rounded thresholds so the five moments land deliberately, while layered image crossfades and staggered copy transitions remain calm. The visible composition stays `100svh`; only the internal scroll travel is longer. Mobile and reduced-motion paths remain non-pinned. Typecheck and production build pass, desktop/mobile screenshots were captured, and the browser console is clean. The standard large-chunk advisory remains the only build note.
