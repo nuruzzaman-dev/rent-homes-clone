@@ -51,3 +51,13 @@
 - [x] Provide a reduced-motion fallback with no forced scrub transitions.
 - [x] Re-run typecheck, production build, responsive screenshots, and browser-console QA.
 - [ ] Save the updated checkpoint after verification.
+
+## Section 10 compact 100vh refinement
+
+- [x] Keep What matters visually contained within a 100vh viewport presentation on desktop and mobile.
+- [x] Replace abrupt active-state changes with smooth scrubbed transitions for typography, supporting copy, image opacity, and crop.
+- [x] Keep a deliberate hold window for each of the six feel states while the section is pinned on desktop.
+- [x] Keep click selection synchronized with the smoother scrubbed state.
+- [x] Preserve non-pinned mobile and reduced-motion fallbacks.
+- [x] Re-run typecheck, build, responsive screenshots, and browser-console QA.
+- [ ] Save the updated checkpoint after verification.

@@ -39,3 +39,7 @@ Section 10 / What matters was refactored into a desktop-only pinned composition.
 ## Signature experience timing update — 2026-08-24
 
 The 05 / Signature experience was refined to stay within a `100svh` visual presentation rather than using the previous `140svh` section. Desktop scroll still drives the timeline through a compact pinned travel distance, but each state now has a longer hold zone. Transition boundaries use two stacked images for a layered crossfade, while time, title, and copy fade out, update, and return with staggered motion. The next frame is prepared progressively. Mobile and reduced-motion paths remain non-pinned and readable. TypeScript and production builds pass, updated desktop/mobile screenshots were captured, and the browser console is clean. The build retains only the existing large-chunk advisory.
+
+## Section 10 compact 100vh update — 2026-08-24
+
+Section 10 / What matters now uses a `100svh` desktop presentation with a pinned `+900px` scrub travel rather than an expanding content block. The six feel states retain deliberate hold windows, while typography and image opacity/crop transitions are eased to feel continuous instead of abrupt. Click selection remains synchronized with the active image state. Mobile and reduced-motion paths stay non-pinned and readable. Final typecheck and production build pass; desktop/mobile captures were taken after the JSX fix; the browser console is clean. The build continues to show only the standard large-chunk advisory.
