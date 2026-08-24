@@ -107,3 +107,7 @@ Refined the mobile Exploration composition so the copy remains within the viewpo
 ## Requested mobile Exploration behavior — 2026-08-24
 
 Implemented the requested mobile interaction: the section opens with the label, heading, supporting copy, and a responsive lifestyle image visible within the phone viewport; while scrolling down, the section pins and the image track moves right to left along the bottom of the viewport; scrolling upward reverses the track naturally; and the copy layer returns to full visibility at the timeline boundaries. The desktop `desktopMotion` branch and `lg:` layout behavior remain unchanged. Typecheck and production build pass, mobile and desktop previews were inspected, and the browser console is clean.
+
+## Mobile Exploration image-height refinement — 2026-08-24
+
+Shortened the mobile Exploration lifestyle image frame by changing only the base mobile aspect ratio to `1.24`, producing a wider and shorter image that fits the phone viewport more comfortably. The original desktop `lg:aspect-[0.9]` crop remains explicitly preserved. The pinned right-to-left track, responsive card width, label layer, and handoff into 04 / Imagination remain unchanged. Typecheck/build pass, mobile and desktop previews were inspected, the anchor was checked, and the browser console is clean.

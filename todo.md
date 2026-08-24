@@ -205,3 +205,10 @@
 - [x] Preserve desktop Exploration code and visual behavior.
 - [x] Self-check mobile states, desktop preservation, build health, and console output.
 - [x] Save the implementation checkpoint.
+
+## Mobile Exploration image height refinement
+- [x] Audit the current mobile image height and viewport composition.
+- [x] Shorten only the mobile lifestyle image frame while preserving desktop image proportions.
+- [x] Preserve pinned right-to-left travel and section handoff.
+- [x] Verify mobile/tablet/desktop previews, build health, and console output.
+- [x] Save the image-height refinement checkpoint.
