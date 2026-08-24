@@ -40,3 +40,14 @@
 - [x] Provide a mobile and reduced-motion fallback that remains readable and does not pin or force horizontal movement.
 - [x] Re-run typecheck, production build, desktop/mobile screenshots, and browser-console QA.
 - [ ] Save the updated checkpoint after verification.
+
+## Signature experience compact cinematic timing
+
+- [x] Keep the Signature experience presentation within 100vh on desktop and mobile viewport composition.
+- [x] Replace instant frame swaps with layered incoming/outgoing image crossfades.
+- [x] Add hold zones so each time-of-day state remains stable before transitioning.
+- [x] Stagger time, title, and copy transitions with calm editorial timing.
+- [x] Keep the scroll-controlled interaction smooth without adding extra section height.
+- [x] Provide a reduced-motion fallback with no forced scrub transitions.
+- [x] Re-run typecheck, production build, responsive screenshots, and browser-console QA.
+- [ ] Save the updated checkpoint after verification.

@@ -35,3 +35,7 @@ Final `pnpm check` and `pnpm build` pass. Desktop and mobile full-page screensho
 ## Section 10 pinned scrub update — 2026-08-24
 
 Section 10 / What matters was refactored into a desktop-only pinned composition. The section now remains fixed for an intentional scrub distance while the six feel states advance from Space through Location, the active typography changes, the image source changes, and image opacity/crop transitions are choreographed on state boundaries. Clicked feel-word controls use the same image transition helper and stay synchronized with the active state. Mobile and reduced-motion paths remain non-pinned and readable. TypeScript and production build checks pass, updated desktop/mobile full-page captures were taken, and the browser console is clean.
+
+## Signature experience timing update — 2026-08-24
+
+The 05 / Signature experience was refined to stay within a `100svh` visual presentation rather than using the previous `140svh` section. Desktop scroll still drives the timeline through a compact pinned travel distance, but each state now has a longer hold zone. Transition boundaries use two stacked images for a layered crossfade, while time, title, and copy fade out, update, and return with staggered motion. The next frame is prepared progressively. Mobile and reduced-motion paths remain non-pinned and readable. TypeScript and production builds pass, updated desktop/mobile screenshots were captured, and the browser console is clean. The build retains only the existing large-chunk advisory.
