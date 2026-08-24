@@ -176,3 +176,10 @@
 - [x] Preserve desktop Exploration layout and animation behavior.
 - [x] Verify mobile/tablet/desktop rendering, scroll progression, build health, and browser console status.
 - [x] Save the verified Exploration fix checkpoint.
+
+## Complete mobile 03 / Exploration animation
+- [x] Reproduce the reported mobile Exploration behavior at the section anchor and through the full card sequence.
+- [x] Replace the partial mobile reveal with a complete scroll-driven card progression and stable section flow.
+- [x] Preserve desktop horizontal pinning and visual composition.
+- [x] Validate phone/tablet/desktop scroll behavior, build health, and console output.
+- [x] Save the completed Exploration checkpoint.
