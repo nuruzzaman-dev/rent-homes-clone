@@ -159,3 +159,13 @@
 - [x] Preserve desktop 240-frame canvas behavior and desktop design unchanged.
 - [x] Verify on mobile and desktop, then run typecheck/build/console QA.
 - [ ] Save the pinned Immersion checkpoint.
+
+## Full mobile Immersion frame sequence
+
+- [x] Confirm the complete ordered 240-frame manifest is available to the frontend.
+- [x] Render the full sequence on mobile with the same canvas approach used by desktop, using a mobile-safe canvas resolution.
+- [x] Preload the first frame immediately and progressively load the remaining frames without mounting 240 visible image elements.
+- [x] Map mobile scroll progress across the complete 001 / 240 range and keep the final frame settled before release into 02 / Desire.
+- [x] Preserve a poster/reduced-motion fallback for devices that cannot animate the full sequence.
+- [x] Verify mobile frame progression, loading behavior, pin release, desktop preservation, build health, and console status.
+- [ ] Save the full mobile sequence checkpoint.

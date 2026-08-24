@@ -83,3 +83,7 @@ Root cause: mobile intentionally skipped the desktop canvas branch, and the prev
 ## Mobile pinned Immersion correction — 2026-08-24
 
 The previous mobile Immersion fix used a non-pinned scrub reveal, unlike 05 / Signature, so it did not match the requested interaction pattern. Replaced that mobile path with a dedicated pinned GSAP timeline: 100svh poster composition, `top top` pinning, 1200px internal travel, 1.45 scrub smoothing, poster scale/opacity, copy reveal, and marker reveal. The desktop 240-frame canvas branch was not changed. The mobile Immersion anchor renders correctly in preview and the browser console is clean; typecheck/build pass.
+
+## Full mobile Immersion sequence — 2026-08-24
+
+Enabled the same complete 240-frame canvas renderer on mobile instead of the poster-only fallback. Mobile uses the existing ordered frame manifest, progressively warms frames in small batches, renders at the mobile canvas dimensions, pins for 1500px of internal travel, and maps scroll progress across 001 / 240. Verified in the preview by scrolling from the Immersion anchor to `240 / 240`; the final frame displayed and the section remained able to continue into 02 / Desire. Browser console remained clean and typecheck/build pass. Desktop branch and design were preserved.
