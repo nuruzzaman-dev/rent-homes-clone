@@ -111,3 +111,7 @@ Implemented the requested mobile interaction: the section opens with the label, 
 ## Mobile Exploration image-height refinement — 2026-08-24
 
 Shortened the mobile Exploration lifestyle image frame by changing only the base mobile aspect ratio to `1.24`, producing a wider and shorter image that fits the phone viewport more comfortably. The original desktop `lg:aspect-[0.9]` crop remains explicitly preserved. The pinned right-to-left track, responsive card width, label layer, and handoff into 04 / Imagination remain unchanged. Typecheck/build pass, mobile and desktop previews were inspected, the anchor was checked, and the browser console is clean.
+
+## Mobile Exploration full-width image sizing — 2026-08-24
+
+Changed the lifestyle card width utilities so mobile cards use the full available phone width: `calc(100vw - 2rem)` on phones and `calc(100vw - 4rem)` at the small breakpoint, matching the section’s horizontal breathing room. Each card retains its responsive mobile aspect ratio, while the original desktop `lg:w-[...]` width utilities and `lg:aspect-[0.9]` image crop remain unchanged. The pinned right-to-left mobile track and section handoff were preserved. Typecheck/build pass, mobile and desktop previews were inspected, the anchor was checked, and the browser console is clean.

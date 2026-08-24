@@ -212,3 +212,10 @@
 - [x] Preserve pinned right-to-left travel and section handoff.
 - [x] Verify mobile/tablet/desktop previews, build health, and console output.
 - [x] Save the image-height refinement checkpoint.
+
+## Mobile Exploration full-width image sizing
+- [x] Audit the current mobile card width and height rules.
+- [x] Make mobile lifestyle image cards full viewport width with responsive height only on mobile.
+- [x] Preserve desktop card dimensions, crop, layout, and animation unchanged.
+- [x] Verify mobile/tablet/desktop previews, build health, and console output.
+- [x] Save the full-width image checkpoint.
