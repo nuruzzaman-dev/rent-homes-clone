@@ -67,3 +67,7 @@ Adjusted the exterior-to-interior ScrollTrigger handoff so the scrub settles to 
 ## Cinematic section order change — 2026-08-24
 
 Moved `02 / Immersion` directly below the hero. `02 / Desire` now follows the cinematic sequence, and the existing Exploration, property, Signature, Attention, Place, Confidence, Decision, What matters, stories, CTA, and footer sections remain in their prior order and styling. Desktop and mobile full-page captures confirm the revised composition. Browser content extraction confirms the order Hero → Immersion → Desire → Exploration, and the console is clean. Typecheck and production build pass; the standard large-chunk advisory remains the only build note.
+
+## Mobile-first responsive pass — 2026-08-24
+
+Refined only base/mobile and tablet utility values while preserving existing `lg:` desktop composition and desktop GSAP behavior. The phone layout now uses safer horizontal padding, a readable fluid hero heading, stacked full-width search fields, compact viewport spacing, touch-sized menu controls, and non-canvas cinematic poster behavior. Tablet capture confirms the intermediate layout remains legible and the desktop capture remains visually consistent. Typecheck and production build pass; the browser console is clean. The only build note is the existing large-chunk advisory.

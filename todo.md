@@ -120,3 +120,14 @@
 - [x] Verify navigation anchors and page flow after the reorder.
 - [x] Re-run typecheck, production build, screenshots, and browser-console QA.
 - [ ] Save the reordered-section checkpoint.
+
+## Mobile-first responsive pass
+
+- [x] Audit phone and tablet layouts against the approved desktop baseline without altering desktop composition.
+- [x] Improve mobile hero text scale, safe-area spacing, search stacking, and navigation touch targets.
+- [x] Ensure the 240-frame cinematic section uses a stable poster fallback on mobile and preserves desktop canvas animation.
+- [x] Ensure all cards, galleries, timelines, hotspots, selectors, and CTA controls fit narrow widths without clipping or horizontal overflow.
+- [x] Preserve desktop-only pinning, custom cursor, and GSAP animation behavior at desktop breakpoints.
+- [x] Add or refine touch-friendly focus/active states and reduced-motion behavior.
+- [x] Verify representative phone, tablet, and desktop screenshots plus browser-console/build health.
+- [ ] Save the responsive checkpoint.
