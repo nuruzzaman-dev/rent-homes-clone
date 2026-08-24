@@ -140,3 +140,12 @@
 - [x] Verify phone and tablet motion behavior, reduced-motion behavior, and unchanged desktop animation behavior.
 - [x] Re-run typecheck, production build, screenshots, and browser-console QA.
 - [ ] Save the mobile animation fix checkpoint.
+
+## Mobile Immersion animation fix
+
+- [x] Identify why the mobile 02 / Immersion poster and content reveal is not visibly animating.
+- [x] Add a dedicated mobile Immersion entrance with poster scale/opacity and staggered copy/marker reveal.
+- [x] Keep the mobile treatment non-pinned and avoid loading the 240-frame canvas sequence on phones.
+- [x] Preserve desktop canvas scrubbing, pinning, and handoff behavior exactly.
+- [x] Verify the section on phone and desktop, then run typecheck/build/console QA.
+- [ ] Save the Immersion animation checkpoint.

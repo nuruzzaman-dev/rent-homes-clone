@@ -75,3 +75,7 @@ Refined only base/mobile and tablet utility values while preserving existing `lg
 ## Mobile animation fix — 2026-08-24
 
 Root cause: the main effect defined `desktopMotion` as `(min-width: 1024px) and (prefers-reduced-motion: no-preference)`, and the cinematic canvas, pinned day timeline, pinned method, and pinned What matters timelines were intentionally guarded by that condition. On phones and tablets, only the initial reveal animation and a few non-pinned progress effects could run, so the mobile experience appeared static. Added a separate `mobileMotion` path that provides lightweight section reveal animations and subtle poster/image scale-in for the cinematic and day sections, while keeping desktop pinning, custom cursor, and canvas sequence loading unchanged. Typecheck/build pass, phone and desktop captures pass, and browser console is clean.
+
+## Mobile Immersion animation fix — 2026-08-24
+
+Root cause: mobile intentionally skipped the desktop canvas branch, and the previous mobile fallback only had a generic section reveal, so the 02 / Immersion poster and internal content had no dedicated, visible animation choreography. Added explicit mobile targets for the poster, copy, and Exterior → Interior → Room markers, with a non-pinned scrubbed reveal and poster scale/opacity transition. The desktop 240-frame canvas branch remains unchanged. The mobile Immersion anchor was inspected in the preview, the poster and copy rendered correctly, and the browser console was clean. Typecheck and production build pass.
