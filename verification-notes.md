@@ -115,3 +115,7 @@ Shortened the mobile Exploration lifestyle image frame by changing only the base
 ## Mobile Exploration full-width image sizing — 2026-08-24
 
 Changed the lifestyle card width utilities so mobile cards use the full available phone width: `calc(100vw - 2rem)` on phones and `calc(100vw - 4rem)` at the small breakpoint, matching the section’s horizontal breathing room. Each card retains its responsive mobile aspect ratio, while the original desktop `lg:w-[...]` width utilities and `lg:aspect-[0.9]` image crop remain unchanged. The pinned right-to-left mobile track and section handoff were preserved. Typecheck/build pass, mobile and desktop previews were inspected, the anchor was checked, and the browser console is clean.
+
+## Mobile Exploration text presentation refinement — 2026-08-24
+
+Restored the mobile Exploration text block to a desktop-like editorial position by vertically centering the label, heading, supporting copy, and Drag / scroll prompt within the pinned section. The current mobile full-width image treatment, image height, crop, horizontal track, and pinned travel were not changed. Desktop `lg:` layout and animation behavior remain unchanged. Typecheck/build pass, mobile and desktop previews were inspected, the anchor was checked, and the browser console is clean.

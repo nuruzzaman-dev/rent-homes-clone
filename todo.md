@@ -219,3 +219,11 @@
 - [x] Preserve desktop card dimensions, crop, layout, and animation unchanged.
 - [x] Verify mobile/tablet/desktop previews, build health, and console output.
 - [x] Save the full-width image checkpoint.
+
+## Mobile Exploration text presentation refinement
+- [x] Audit the current mobile text block against the desktop presentation.
+- [x] Restore mobile label, heading, copy, and Drag / scroll spacing to the previous desktop-like treatment.
+- [x] Preserve the current mobile image width, height, crop, and pinned travel.
+- [x] Preserve desktop layout and animation unchanged.
+- [x] Verify mobile/desktop previews, build health, and console output.
+- [x] Save the text presentation checkpoint.
