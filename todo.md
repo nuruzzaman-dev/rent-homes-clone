@@ -197,3 +197,11 @@
 - [x] Preserve pinned right-to-left travel and reliable section handoff.
 - [x] Verify phone/tablet/desktop previews, build health, and console output.
 - [x] Save the responsive Exploration checkpoint.
+
+## Implement requested mobile Exploration behavior
+- [x] Audit the current mobile opening composition and boundary states.
+- [x] Implement responsive text-plus-image opening view with bottom-pinned horizontal travel and reverse-on-scroll behavior.
+- [x] Restore the text label at the top and bottom boundaries of the mobile timeline.
+- [x] Preserve desktop Exploration code and visual behavior.
+- [x] Self-check mobile states, desktop preservation, build health, and console output.
+- [x] Save the implementation checkpoint.

@@ -103,3 +103,7 @@ The previous mobile vertical pin was removed because it did not match the reques
 ## Responsive mobile 03 / Exploration viewport — 2026-08-24
 
 Refined the mobile Exploration composition so the copy remains within the viewport at the top of the pinned section and the active lifestyle image uses a responsive `78vw` card width with a viewport-safe bottom track. Mobile keeps the requested right-to-left horizontal pin and continues into 04 / Imagination. Desktop keeps its original `lg:` geometry, spacing, card widths, and horizontal pin. Typecheck and production build pass; phone and desktop full-page previews were captured; the Exploration anchor was inspected; and the browser console remained clean.
+
+## Requested mobile Exploration behavior — 2026-08-24
+
+Implemented the requested mobile interaction: the section opens with the label, heading, supporting copy, and a responsive lifestyle image visible within the phone viewport; while scrolling down, the section pins and the image track moves right to left along the bottom of the viewport; scrolling upward reverses the track naturally; and the copy layer returns to full visibility at the timeline boundaries. The desktop `desktopMotion` branch and `lg:` layout behavior remain unchanged. Typecheck and production build pass, mobile and desktop previews were inspected, and the browser console is clean.
