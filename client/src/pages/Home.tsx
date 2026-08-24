@@ -200,7 +200,7 @@ export default function Home() {
             .to([dayTimeRef.current, dayTitleRef.current, dayCopyRef.current], { autoAlpha: 1, y: 0, duration: 0.48, stagger: 0.055, ease: "power3.out" }, 0.48)
             .call(() => { dayLayerRef.current = dayLayerRef.current === 0 ? 1 : 0; });
         };
-        gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: dayRef.current, start: "top top", end: "+=1000", pin: true, pinSpacing: true, scrub: 1.15, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: updateDay } });
+        gsap.to(proxy, { progress: 1, ease: "none", scrollTrigger: { trigger: dayRef.current, start: "top top", end: "+=1400", pin: true, pinSpacing: true, scrub: 1.65, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: updateDay } });
       }
       if (methodLineRef.current && methodRef.current && !reduced) gsap.fromTo(methodLineRef.current, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", ease: "none", scrollTrigger: { trigger: methodRef.current, start: "top 72%", end: "bottom 38%", scrub: 1 } });
       if (methodRef.current && desktopMotion) {
@@ -209,7 +209,7 @@ export default function Home() {
       }
       if (timelineRef.current && timelineProgressRef.current && !reduced) gsap.fromTo(timelineProgressRef.current, { scaleX: 0 }, { scaleX: 1, transformOrigin: "left center", ease: "none", scrollTrigger: { trigger: timelineRef.current, start: "top 80%", end: "bottom 35%", scrub: 1 } });
       if (feelRef.current && feelImageRef.current && desktopMotion) {
-        gsap.to({ progress: 0 }, { progress: 1, ease: "none", scrollTrigger: { trigger: feelRef.current, start: "top top", end: "+=900", pin: true, pinSpacing: true, scrub: 1.25, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: (self) => { const index = Math.min(feelWords.length - 1, Math.floor(self.progress * feelWords.length)); if (index === feelIndexRef.current) return; feelIndexRef.current = index; setActiveFeel(index); const image = feelImageRef.current; if (image) { gsap.timeline({ defaults: { overwrite: true } }).to(image, { opacity: 0, scale: 1.02, duration: 0.28, ease: "power2.out" }).call(() => { image.src = feelImages[index]; }).to(image, { opacity: 1, scale: 1, duration: 0.58, ease: "power3.out" }); } } } });
+        gsap.to({ progress: 0 }, { progress: 1, ease: "none", scrollTrigger: { trigger: feelRef.current, start: "top top", end: "+=1400", pin: true, pinSpacing: true, scrub: 1.75, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: (self) => { const index = Math.min(feelWords.length - 1, Math.floor(self.progress * feelWords.length)); if (index === feelIndexRef.current) return; feelIndexRef.current = index; setActiveFeel(index); const image = feelImageRef.current; if (image) { gsap.timeline({ defaults: { overwrite: true } }).to(image, { opacity: 0, scale: 1.02, duration: 0.38, ease: "power2.out" }).call(() => { image.src = feelImages[index]; }).to(image, { opacity: 1, scale: 1, duration: 0.72, ease: "power3.out" }); } } } });
       }
       ScrollTrigger.refresh();
     }, rootRef);
@@ -223,7 +223,7 @@ export default function Home() {
     return () => { animation.kill(); };
   }, [menuOpen]);
 
-  const chooseFeel = (index: number) => { setActiveFeel(index); feelIndexRef.current = index; const image = feelImageRef.current; if (image && image.src !== feelImages[index]) { gsap.to(image, { opacity: 0, duration: 0.16, overwrite: true, onComplete: () => { image.src = feelImages[index]; gsap.to(image, { opacity: 1, duration: 0.34, overwrite: true }); } }); } };
+  const chooseFeel = (index: number) => { setActiveFeel(index); feelIndexRef.current = index; const image = feelImageRef.current; if (image && image.src !== feelImages[index]) { gsap.to(image, { opacity: 0, duration: 0.32, overwrite: true, onComplete: () => { image.src = feelImages[index]; gsap.to(image, { opacity: 1, duration: 0.62, overwrite: true }); } }); } };
   const search = () => { document.querySelector("#properties")?.scrollIntoView({ behavior: "smooth" }); toast.success(filteredProperties.length ? `${filteredProperties.length} residences in your view` : "Try widening your search", { description: "Your shortlist is updated below." }); };
   const toggleSaved = (name: string) => { const next = saved.includes(name) ? saved.filter((item) => item !== name) : [...saved, name]; setSaved(next); toast(next.includes(name) ? "Saved to your shortlist" : "Removed from your shortlist"); };
   const start = () => { setCity("All cities"); setType("Any property"); setPrice("Any price"); window.scrollTo({ top: 0, behavior: "smooth" }); };

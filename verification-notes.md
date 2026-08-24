@@ -43,3 +43,7 @@ The 05 / Signature experience was refined to stay within a `100svh` visual prese
 ## Section 10 compact 100vh update — 2026-08-24
 
 Section 10 / What matters now uses a `100svh` desktop presentation with a pinned `+900px` scrub travel rather than an expanding content block. The six feel states retain deliberate hold windows, while typography and image opacity/crop transitions are eased to feel continuous instead of abrupt. Click selection remains synchronized with the active image state. Mobile and reduced-motion paths stay non-pinned and readable. Final typecheck and production build pass; desktop/mobile captures were taken after the JSX fix; the browser console is clean. The build continues to show only the standard large-chunk advisory.
+
+## Smooth scroll refinement — 2026-08-24
+
+The Signature experience and What matters now use more internal scroll breathing room while preserving their `100svh` visible compositions. Signature scrub travel increased to 1400px with a 1.65 scrub lag; What matters uses 1400px with a 1.75 scrub lag. What matters image transitions now ease through a slower opacity/scale crossfade, and click selection uses a slower crossfade as well. Desktop and mobile screenshots were captured after the update, typecheck and production build pass, and the browser console is clean. The build retains only the standard large-chunk advisory.

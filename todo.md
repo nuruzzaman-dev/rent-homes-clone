@@ -61,3 +61,12 @@
 - [x] Preserve non-pinned mobile and reduced-motion fallbacks.
 - [x] Re-run typecheck, build, responsive screenshots, and browser-console QA.
 - [ ] Save the updated checkpoint after verification.
+
+## Smooth scroll refinement
+
+- [x] Increase internal scroll breathing room while keeping Signature and What matters visibly at 100vh.
+- [x] Add stronger hold zones and smoother scrub lag to both cinematic sections.
+- [x] Use calmer crossfade and copy-transition timing at state boundaries.
+- [x] Keep reduced-motion and mobile behavior stable.
+- [x] Re-run typecheck, production build, screenshots, and browser-console QA.
+- [ ] Save the smoother-scroll checkpoint.
